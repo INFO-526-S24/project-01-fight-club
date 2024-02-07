@@ -44,11 +44,11 @@ day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascie
 
 ```
 
-The UFO Sightings Redux data comes from the National UFO Reporting Center, cleaned and enriched with data from sunrise-sunset.org by Jon Harmo. 
+The UFO Sightings Redux data comes from the National UFO Reporting Center, cleaned and enriched with data from sunrise-sunset.org by Jon Harmo.
 
 The collection of verified UFO sightings from multiple sources is compiled into a comprehensive list called TidyTuesday UFO sightings. The location (latitude and longitude), the time and date of the sighting, the shape of the purported UFO, the duration of the sighting, and any other comments or descriptions provided by witnesses are typically included in this dataset.
 
-There are 3 CSV files in the dataset: 
+There are 3 CSV files in the dataset:
 
 ufo_sightings.csv: It has 12 variables such as city, state, country_code, and shape. In total 96,429 rows.
 
@@ -57,6 +57,10 @@ places.csv: It has 10 variables such as longitude, latitude and time zone, count
 day_parts_map.csv: It has 12 variables such as sunrise, sunset, civil_twilight_end, nautical_twilight_end, and astronomical_twilight_end. It’s of 26,409 rows.
 
 Make sure to load the data and use inline code for some of this information.
+
+**Why did you choose this dataset?**
+
+There are several reasons why we chose this dataset. The first reason is that the data is well-formatted and is rich in variables, making it interesting for data wrangling and visualizing patterns. The second reason is the social media engagement and interest in this particular phenomenon. We will determine whether the Naruto Run to Area 51 was worth the time and resources. Lastly, UFO sightings hold a plethora of significance in scientific research, as humans have been wondering and searching for life outside Earth ever since the first telescope was discovered. In summary, it would be interesting to engage in discussions of mysteries of the cosmos and extraterrestrial life while also contributing to the cause with our visualizations.
 
 ## Questions
 
