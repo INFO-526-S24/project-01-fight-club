@@ -18,7 +18,17 @@ library(tidyverse)
 #| message: false
 ```
 
-A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
+The UFO Sightings Redux data comes from the National UFO Reporting Center, cleaned and enriched with data from sunrise-sunset.org by Jon Harmo. 
+
+The collection of verified UFO sightings from multiple sources is compiled into a comprehensive list called TidyTuesday UFO sightings. The location (latitude and longitude), the time and date of the sighting, the shape of the purported UFO, the duration of the sighting, and any other comments or descriptions provided by witnesses are typically included in this dataset.
+
+There are 3 CSV files in the dataset: 
+
+ufo_sightings.csv: It has 12 variables such as city, state, country_code, and shape. In total 96,429 rows.
+
+places.csv: It has 10 variables such as longitude, latitude and time zone, country_code, and alternate_city_names. There are 14,417 rows.
+
+day_parts_map.csv: It has 12 variables such as sunrise, sunset, civil_twilight_end, nautical_twilight_end, and astronomical_twilight_end. It’s of 26,409 rows.
 
 Make sure to load the data and use inline code for some of this information.
 
