@@ -44,6 +44,8 @@ day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascie
 
 ```
 
+**Description of the dataset**
+
 The UFO Sightings Redux data comes from the National UFO Reporting Center, cleaned and enriched with data from sunrise-sunset.org by Jon Harmo.
 
 The collection of verified UFO sightings from multiple sources is compiled into a comprehensive list called TidyTuesday UFO sightings. The location (latitude and longitude), the time and date of the sighting, the shape of the purported UFO, the duration of the sighting, and any other comments or descriptions provided by witnesses are typically included in this dataset.
