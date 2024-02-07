@@ -68,6 +68,11 @@ There are several reasons why we chose this dataset. The first reason is that th
 
 Q.1) What is the geographic distribution of UFO sightings? Are there any hotspots where the number of sightings is prevalent? Is there any correlation between the location of the sighting and the shape of the UFO?
 
+-   Our plan for tackling this question involves using the ufo_sightings.csv and the places.csv.
+-   The data will be then visualized, and the geographical locations of the sightings will be plotted on a map using the ggplot2 package. 
+-   The hotspots where the sightings are prevalent can also be visualized using the dataset.
+-   Then a stacked bar chart can be plotted to show the correlation between the location of the sightings and the shape of the UFO.
+
 Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?
 
 ## Analysis plan
