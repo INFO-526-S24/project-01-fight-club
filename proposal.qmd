@@ -50,7 +50,9 @@ Make sure to load the data and use inline code for some of this information.
 
 ## Questions
 
-The two questions you want to answer.
+Q.1) What is the geographic distribution of UFO sightings? Are there any hotspots where the number of sightings is prevalent? Is there any correlation between the location of the sighting and the shape of the UFO?
+
+Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?
 
 ## Analysis plan
 
