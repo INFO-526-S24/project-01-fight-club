@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.538">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -160,8 +160,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset">Dataset</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
   <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a></li>
   </ul>
@@ -190,24 +190,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"tidytuesdayR"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"tidytuesdayR"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="dataset" class="level2">
-<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the Data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the data manually</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ufo_sightings <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv'</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>places <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv'</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>day_parts_map <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p><strong>Description of the dataset</strong></p>
@@ -219,7 +201,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>places.csv</code>: It has 10 variables such as longitude, latitude and time zone, country_code, and alternate_city_names. There are 14,417 rows.</p></li>
 <li><p><code>day_parts_map.csv</code>: It has 12 variables such as sunrise, sunset, civil_twilight_end, nautical_twilight_end, and astronomical_twilight_end. It’s of 26,409 rows.</p></li>
 </ul>
-<p>Make sure to load the data and use inline code for some of this information.</p>
+</section>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the Data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the data manually</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ufo_sightings <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>places <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>day_parts_map <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(day_parts_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 12
+  rounded_lat rounded_long rounded_date astronomical_twilight_begin
+        &lt;dbl&gt;        &lt;dbl&gt; &lt;date&gt;       &lt;time&gt;                     
+1          40          -80 2022-08-28   09:07:43                   
+2          40          -90 2022-08-21   09:38:33                   
+3          40          -80 2022-08-14   08:48:54                   
+4          40          -90 2022-08-07   09:19:00                   
+5          30         -120 2022-08-07   11:55:02                   
+6          40         -100 2022-07-24   09:39:05                   
+# ℹ 8 more variables: nautical_twilight_begin &lt;time&gt;,
+#   civil_twilight_begin &lt;time&gt;, sunrise &lt;time&gt;, solar_noon &lt;time&gt;,
+#   sunset &lt;time&gt;, civil_twilight_end &lt;time&gt;, nautical_twilight_end &lt;time&gt;,
+#   astronomical_twilight_end &lt;time&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(places)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  city        alternate_city_names state country country_code latitude longitude
+  &lt;chr&gt;       &lt;chr&gt;                &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1 Pinehurst   Pajnkherst,bynhwrst… NC    USA     US               35.2     -79.5
+2 Rapid City  &lt;NA&gt;                 MI    USA     US               44.8     -85.3
+3 Cleveland   CLE,Cleaveland,Clev… OH    USA     US               41.5     -81.7
+4 Bloomington BMG,Bloomington,Blu… IN    USA     US               39.2     -86.5
+5 Irvine      rvajn,Ervajn,Irvajn… CA    USA     US               33.7    -118. 
+6 Moore       Mur,mu er,mua,mueo,… OK    USA     US               35.3     -97.5
+# ℹ 3 more variables: timezone &lt;chr&gt;, population &lt;dbl&gt;, elevation_m &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ufo_sightings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 12
+  reported_date_time  reported_date_time_utc posted_date city        state
+  &lt;dttm&gt;              &lt;dttm&gt;                 &lt;date&gt;      &lt;chr&gt;       &lt;chr&gt;
+1 2022-08-29 06:03:00 2022-08-29 06:03:00    2022-09-09  Pinehurst   NC   
+2 2022-08-20 01:51:00 2022-08-20 01:51:00    2022-10-08  Rapid City  MI   
+3 2022-08-13 05:30:00 2022-08-13 05:30:00    2022-09-09  Cleveland   OH   
+4 2022-08-06 21:00:00 2022-08-06 21:00:00    2022-09-09  Bloomington IN   
+5 2022-08-04 07:40:00 2022-08-04 07:40:00    2022-09-09  Irvine      CA   
+6 2022-07-22 16:00:00 2022-07-22 16:00:00    2022-09-09  Moore       OK   
+# ℹ 7 more variables: country_code &lt;chr&gt;, shape &lt;chr&gt;, reported_duration &lt;chr&gt;,
+#   duration_seconds &lt;dbl&gt;, summary &lt;chr&gt;, has_images &lt;lgl&gt;, day_part &lt;chr&gt;</code></pre>
+</div>
+</div>
 <p><strong>Why did you choose this dataset?</strong></p>
 <p>There are several reasons why we chose this dataset. The first reason is that the data is well-formatted and is rich in variables, making it interesting for data wrangling and visualizing patterns. The second reason is the social media engagement and interest in this particular phenomenon. We will determine whether the Naruto Run to Area 51 was worth the time and resources. Lastly, UFO sightings hold a plethora of significance in scientific research, as humans have been wondering and searching for life outside Earth ever since the first telescope was discovered. In summary, it would be interesting to engage in discussions of mysteries of the cosmos and extraterrestrial life while also contributing to the cause with our visualizations.</p>
 </section>
@@ -239,10 +278,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?</strong></p>
 <ul>
-<li><p>To solve this question, we will use the `ufo_sightings.csv` and the `day_parts_map.csv` datasets.</p></li>
+<li><p>To solve this question, we will use the <code>ufo_sightings.csv</code> and the <code>day_parts_map.csv</code> datasets.</p></li>
 <li><p>Then, using the data given in the dataset, we will group the sightings based on seasons of the year (i.e.&nbsp;winter, spring, summer, and fall)</p></li>
 <li><p>From there, we can create a time series analysis plot to visualize if there are any patterns in the sightings concerning the season.</p></li>
-<li><p>From the `day_parts_map.csv` dataset we can also visualize if there is any correlation between astronomical events (such as twilight, sunrise, sunset, etc.) and UFO sightings</p></li>
+<li><p>From the <code>day_parts_map.csv</code> dataset we can also visualize if there is any correlation between astronomical events (such as twilight, sunrise, sunset, etc.) and UFO sightings</p></li>
 </ul>
 
 
@@ -410,7 +449,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {

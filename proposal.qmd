@@ -5,30 +5,6 @@ format: html
 editor: visual
 ---
 
-```{r}
-#| label: load-pkgs
-#| message: false
-library(tidyverse)
-if (!requireNamespace("tidytuesdayR", quietly = TRUE)) {
-  install.packages("tidytuesdayR")
-}
-library(tidytuesdayR)
-```
-
-## Dataset
-
-```{r}
-#| label: load-dataset
-#| message: false
-
-# Get the Data
-# Reading the data manually
-
-ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
-places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
-day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv')
-
-```
 
 ## Introduction
 
@@ -46,7 +22,31 @@ There are 3 CSV files in the dataset:
 
 -   `day_parts_map.csv`: It has 12 variables such as sunrise, sunset, civil_twilight_end, nautical_twilight_end, and astronomical_twilight_end. It’s of 26,409 rows.
 
-Make sure to load the data and use inline code for some of this information.
+
+## Dataset
+
+```{r}
+#| label: load-dataset
+#| message: false
+#| warning: false
+
+# Get the Data
+# Reading the data manually
+
+library(tidyverse)
+
+
+ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
+places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
+day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv')
+
+head(day_parts_map)
+
+head(places)
+
+head(ufo_sightings)
+
+```
 
 **Why did you choose this dataset?**
 
@@ -69,10 +69,10 @@ Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical
 
 **Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?**
 
-* To solve this question, we will use the `ufo_sightings.csv` and the `day_parts_map.csv` datasets.
+-   To solve this question, we will use the `ufo_sightings.csv` and the `day_parts_map.csv` datasets.
 
-* Then, using the data given in the dataset, we will group the sightings based on seasons of the year (i.e. winter, spring, summer, and fall)
+-   Then, using the data given in the dataset, we will group the sightings based on seasons of the year (i.e. winter, spring, summer, and fall)
 
-* From there, we can create a time series analysis plot to visualize if there are any patterns in the sightings concerning the season.
+-   From there, we can create a time series analysis plot to visualize if there are any patterns in the sightings concerning the season.
 
-* From the `day_parts_map.csv` dataset we can also visualize if there is any  correlation between astronomical events (such as twilight, sunrise, sunset, etc.) and UFO sightings
+-   From the `day_parts_map.csv` dataset we can also visualize if there is any correlation between astronomical events (such as twilight, sunrise, sunset, etc.) and UFO sightings
