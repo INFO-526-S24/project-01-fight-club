@@ -22,21 +22,7 @@ library(tidytuesdayR)
 #| message: false
 
 # Get the Data
-
-# Read in with tidytuesdayR package 
-# Install from CRAN via: install.packages("tidytuesdayR")
-# This loads the readme and all the datasets for the week of interest
-
-# Either ISO-8601 date or year/week works!
-
-tuesdata <- tidytuesdayR::tt_load('2023-06-20')
-tuesdata <- tidytuesdayR::tt_load(2023, week = 25)
-
-ufo_sightings <- tuesdata$`ufo_sightings`
-places <- tuesdata$`places`
-day_parts_map <- tuesdata$`day_parts_map`
-
-# Or read in the data manually
+# Reading the data manually
 
 ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
 places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
@@ -54,11 +40,11 @@ The collection of verified UFO sightings from multiple sources is compiled into 
 
 There are 3 CSV files in the dataset:
 
-* `ufo_sightings.csv`: It has 12 variables such as city, state, country_code, and shape. In total 96,429 rows.
+-   `ufo_sightings.csv`: It has 12 variables such as city, state, country_code, and shape. In total 96,429 rows.
 
-* `places.csv`: It has 10 variables such as longitude, latitude and time zone, country_code, and alternate_city_names. There are 14,417 rows.
+-   `places.csv`: It has 10 variables such as longitude, latitude and time zone, country_code, and alternate_city_names. There are 14,417 rows.
 
-* `day_parts_map.csv`: It has 12 variables such as sunrise, sunset, civil_twilight_end, nautical_twilight_end, and astronomical_twilight_end. It’s of 26,409 rows.
+-   `day_parts_map.csv`: It has 12 variables such as sunrise, sunset, civil_twilight_end, nautical_twilight_end, and astronomical_twilight_end. It’s of 26,409 rows.
 
 Make sure to load the data and use inline code for some of this information.
 
@@ -80,6 +66,5 @@ Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical
 -   The data will be then visualized, and the geographical locations of the sightings will be plotted on a map using the `ggplot2` package.
 -   The hotspots where the sightings are prevalent can also be visualized using the dataset.
 -   Then a stacked bar chart can be plotted to show the correlation between the location of the sightings and the shape of the UFO.
-
 
 **Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?**
