@@ -5,7 +5,6 @@ format: html
 editor: visual
 ---
 
-
 ## Introduction
 
 **Description of the dataset**
@@ -21,7 +20,6 @@ There are 3 CSV files in the dataset:
 -   `places.csv`: It has 10 variables such as longitude, latitude and time zone, country_code, and alternate_city_names. There are 14,417 rows.
 
 -   `day_parts_map.csv`: It has 12 variables such as sunrise, sunset, civil_twilight_end, nautical_twilight_end, and astronomical_twilight_end. It’s of 26,409 rows.
-
 
 ## Dataset
 
@@ -67,12 +65,32 @@ Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical
 -   The hotspots where the sightings are prevalent can also be visualized using the dataset.
 -   Then a stacked bar chart can be plotted to show the correlation between the location of the sightings and the shape of the UFO.
 
+*Parameters used*
+
+-   `ufo_sightings`
+    -   `reported_date_time_utc`
+    -   `city`
+    -   `state`
+    -   `country_code`
+    -   `shape`
+-   `places`
+    -   `latitude`
+    -   `longitude`
+    -   `population`
+    -   `elevation`
+
 **Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?**
 
--   To solve this question, we will use the `ufo_sightings.csv` and the `day_parts_map.csv` datasets.
+-   To solve this question, we will use the `ufo_sightings.csv` dataset.
 
 -   Then, using the data given in the dataset, we will group the sightings based on seasons of the year (i.e. winter, spring, summer, and fall)
 
 -   From there, we can create a time series analysis plot to visualize if there are any patterns in the sightings concerning the season.
 
--   From the `day_parts_map.csv` dataset we can also visualize if there is any correlation between astronomical events (such as twilight, sunrise, sunset, etc.) and UFO sightings
+
+*Parameters used*
+
+-   `ufo_sightings`
+    -   `reported_date_time_utc`
+    -   `day_part`
+    -   `country_code`

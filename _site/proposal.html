@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.538">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -276,12 +276,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The hotspots where the sightings are prevalent can also be visualized using the dataset.</li>
 <li>Then a stacked bar chart can be plotted to show the correlation between the location of the sightings and the shape of the UFO.</li>
 </ul>
+<p><em>Parameters used</em></p>
+<ul>
+<li><code>ufo_sightings</code>
+<ul>
+<li><code>reported_date_time_utc</code></li>
+<li><code>city</code></li>
+<li><code>state</code></li>
+<li><code>country_code</code></li>
+<li><code>shape</code></li>
+</ul></li>
+<li><code>places</code>
+<ul>
+<li><code>latitude</code></li>
+<li><code>longitude</code></li>
+<li><code>population</code></li>
+<li><code>elevation</code></li>
+</ul></li>
+</ul>
 <p><strong>Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?</strong></p>
 <ul>
 <li><p>To solve this question, we will use the <code>ufo_sightings.csv</code> and the <code>day_parts_map.csv</code> datasets.</p></li>
 <li><p>Then, using the data given in the dataset, we will group the sightings based on seasons of the year (i.e.&nbsp;winter, spring, summer, and fall)</p></li>
 <li><p>From there, we can create a time series analysis plot to visualize if there are any patterns in the sightings concerning the season.</p></li>
 <li><p>From the <code>day_parts_map.csv</code> dataset we can also visualize if there is any correlation between astronomical events (such as twilight, sunrise, sunset, etc.) and UFO sightings</p></li>
+</ul>
+<p><em>Parameters used</em></p>
+<ul>
+<li><code>ufo_sightings</code>
+<ul>
+<li><code>reported_date_time_utc</code></li>
+<li><code>day_part</code></li>
+<li><code>country_code</code></li>
+</ul></li>
 </ul>
 
 
@@ -449,12 +476,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
