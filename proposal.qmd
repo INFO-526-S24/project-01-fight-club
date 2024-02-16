@@ -31,18 +31,113 @@ There are 3 CSV files in the dataset:
 # Get the Data
 # Reading the data manually
 
-library(tidyverse)
+options(repos = c(CRAN = "https://cloud.r-project.org/"))
 
+# Now you can install packages without specifying a mirror each time
+install.packages("kableExtra")
+
+library(tidyverse)
+library(kableExtra)
+
+#Loading the Data from Github
 
 ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
 places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
 day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv')
 
-head(day_parts_map)
+```
 
-head(places)
+## Metadata for the Table 1 (UFO SIGHTINGS)
 
-head(ufo_sightings)
+```{r Metadata for the Table 1 (UFO Sightings)}
+
+library(tidyverse)
+library(kableExtra)
+
+# Create metadata tibble including sample data
+metadata_ufo <- tibble(
+  Column = names(ufo_sightings),
+  DataType = sapply(ufo_sightings, class),
+  SampleData = sapply(ufo_sightings, function(column) {
+    # Extracting the first non-NA value as sample. You might adjust this logic based on your needs.
+    first_non_na <- column[!is.na(column)][1]
+    if (is.numeric(first_non_na)) {
+      # For numeric data, format to limit the number of decimal places
+      return(format(first_non_na, nsmall = 2))
+    } else {
+      return(as.character(first_non_na))
+    }
+  })
+)
+
+# Display the metadata with sample data using kable and kableExtra
+metadata_ufo %>%
+  kable("html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>%
+  column_spec(1, bold = T)
+
+```
+
+## Metadata for the Table 2 (PLACES)
+
+```{r Metadata for the Table 2 (Places)}
+
+library(tidyverse)
+library(kableExtra)
+
+# Create metadata tibble including sample data
+metadata_ufo <- tibble(
+  Column = names(places),
+  DataType = sapply(places, class),
+  SampleData = sapply(places, function(column) {
+    # Extracting the first non-NA value as sample. You might adjust this logic based on your needs.
+    first_non_na <- column[!is.na(column)][1]
+    if (is.numeric(first_non_na)) {
+      # For numeric data, format to limit the number of decimal places
+      return(format(first_non_na, nsmall = 2))
+    } else {
+      return(as.character(first_non_na))
+    }
+  })
+)
+
+# Display the metadata with sample data using kable and kableExtra
+metadata_ufo %>%
+  kable("html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>%
+  column_spec(1, bold = T)
+
+```
+## Metadata for the Table 3 (Day_part_map)
+
+
+```{r Metadata for Table 3}
+
+library(tidyverse)
+library(kableExtra)
+
+# Create metadata tibble including sample data
+metadata_ufo <- tibble(
+  Column = names(day_parts_map),
+  DataType = sapply(day_parts_map, class),
+  SampleData = sapply(day_parts_map, function(column) {
+    # Extracting the first non-NA value as sample.
+    first_non_na <- column[!is.na(column)][1]
+    if (is.numeric(first_non_na)) {
+      # For numeric data, format to limit the number of decimal places
+      return(format(first_non_na, nsmall = 2))
+    } else {
+      return(as.character(first_non_na))
+    }
+  })
+)
+
+# Display the metadata with sample data using kable and kableExtra
+metadata_ufo %>%
+  kable("html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>%
+  column_spec(1, bold = T)
+
 
 ```
 
