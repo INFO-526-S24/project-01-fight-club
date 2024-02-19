@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project Title - Are Aliens Real?</title>
+<title>Project Title - Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -168,8 +168,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#metadata-for-the-table-2-places" id="toc-metadata-for-the-table-2-places" class="nav-link" data-scroll-target="#metadata-for-the-table-2-places">Metadata for the Table 2 (PLACES)</a></li>
   <li><a href="#metadata-for-the-table-3-day_part_map" id="toc-metadata-for-the-table-3-day_part_map" class="nav-link" data-scroll-target="#metadata-for-the-table-3-day_part_map">Metadata for the Table 3 (Day_part_map)</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
-  <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a></li>
+  <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a>
+  <ul class="collapse">
+  <li><a href="#discuss-potential-biases." id="toc-discuss-potential-biases." class="nav-link" data-scroll-target="#discuss-potential-biases.">Discuss potential biases.</a></li>
+  </ul></li>
   <li><a href="#data-pre-processing" id="toc-data-pre-processing" class="nav-link" data-scroll-target="#data-pre-processing">Data Pre-processing</a></li>
+  <li><a href="#timeline" id="toc-timeline" class="nav-link" data-scroll-target="#timeline">TIMELINE</a></li>
   </ul>
 </nav>
     </div>
@@ -178,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Are Aliens Real?</h1>
+<h1 class="title">Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data</h1>
 <p class="subtitle lead">Proposal</p>
 </div>
 
@@ -200,8 +204,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p><strong>Description of the dataset</strong></p>
 <p>The UFO Sightings Redux data comes from the National UFO Reporting Center, cleaned and enriched with data from sunrise-sunset.org by Jon Harmo.</p>
-<p>The collection of verified UFO sightings from multiple sources is compiled into a comprehensive list called TidyTuesday UFO sightings. The location (latitude and longitude), the time and date of the sighting, the shape of the purported UFO, the duration of the sighting, and any other comments or descriptions provided by witnesses are typically included in this dataset.</p>
-<p>There are 3 CSV files in the dataset:</p>
+<p>The collection of verified UFO sightings from multiple sources is compiled into a comprehensive list called TidyTuesday UFO sightings. The location (latitude and longitude), the time and date of the sighting, the shape of the purported UFO, the duration of the sighting, and any other comments or descriptions provided by witnesses are typically included in this data-set.</p>
+<p>There are 3 CSV files in the data-set:</p>
 <ul>
 <li><p><code>ufo_sightings.csv</code>: It has 12 variables such as city, state, country_code, and shape. In total 96,429 rows.</p></li>
 <li><p><code>places.csv</code>: It has 10 variables such as longitude, latitude and time zone, country_code, and alternate_city_names. There are 14,417 rows.</p></li>
@@ -222,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>package 'kableExtra' successfully unpacked and MD5 sums checked
 
 The downloaded binary packages are in
-    C:\Users\naiti\AppData\Local\Temp\RtmpakR8i8\downloaded_packages</code></pre>
+    C:\Users\naiti\AppData\Local\Temp\RtmpMpXh9D\downloaded_packages</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
@@ -341,30 +345,6 @@ The downloaded binary packages are in
 <section id="metadata-for-the-table-2-places" class="level2">
 <h2 class="anchored" data-anchor-id="metadata-for-the-table-2-places">Metadata for the Table 2 (PLACES)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create metadata tibble including sample data</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>metadata_ufo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Column =</span> <span class="fu">names</span>(places),</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">DataType =</span> <span class="fu">sapply</span>(places, class),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">SampleData =</span> <span class="fu">sapply</span>(places, <span class="cf">function</span>(column) {</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extracting the first non-NA value as sample. You might adjust this logic based on your needs.</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    first_non_na <span class="ot">&lt;-</span> column[<span class="sc">!</span><span class="fu">is.na</span>(column)][<span class="dv">1</span>]</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.numeric</span>(first_non_na)) {</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># For numeric data, format to limit the number of decimal places</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">format</span>(first_non_na, <span class="at">nsmall =</span> <span class="dv">2</span>))</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">as.character</span>(first_non_na))</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the metadata with sample data using kable and kableExtra</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>metadata_ufo <span class="sc">%&gt;%</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="st">"html"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>), <span class="at">full_width =</span> F) <span class="sc">%&gt;%</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-striped table-hover table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -435,30 +415,6 @@ The downloaded binary packages are in
 <section id="metadata-for-the-table-3-day_part_map" class="level2">
 <h2 class="anchored" data-anchor-id="metadata-for-the-table-3-day_part_map">Metadata for the Table 3 (Day_part_map)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create metadata tibble including sample data</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>metadata_ufo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Column =</span> <span class="fu">names</span>(day_parts_map),</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">DataType =</span> <span class="fu">sapply</span>(day_parts_map, class),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">SampleData =</span> <span class="fu">sapply</span>(day_parts_map, <span class="cf">function</span>(column) {</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extracting the first non-NA value as sample.</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    first_non_na <span class="ot">&lt;-</span> column[<span class="sc">!</span><span class="fu">is.na</span>(column)][<span class="dv">1</span>]</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.numeric</span>(first_non_na)) {</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># For numeric data, format to limit the number of decimal places</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">format</span>(first_non_na, <span class="at">nsmall =</span> <span class="dv">2</span>))</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">as.character</span>(first_non_na))</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the metadata with sample data using kable and kableExtra</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>metadata_ufo <span class="sc">%&gt;%</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="st">"html"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>), <span class="at">full_width =</span> F) <span class="sc">%&gt;%</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-striped table-hover table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -535,8 +491,12 @@ The downloaded binary packages are in
 
 </div>
 </div>
-<p><strong>Why did you choose this dataset?</strong></p>
-<p>There are several reasons why we chose this dataset. The first reason is that the data is well-formatted and is rich in variables, making it interesting for data wrangling and visualizing patterns. The second reason is the social media engagement and interest in this particular phenomenon. We will determine whether the Naruto Run to Area 51 was worth the time and resources. Lastly, UFO sightings hold a plethora of significance in scientific research, as humans have been wondering and searching for life outside Earth ever since the first telescope was discovered. In summary, it would be interesting to engage in discussions of mysteries of the cosmos and extraterrestrial life while also contributing to the cause with our visualizations.</p>
+<p><strong>Why did you choose this data-set?</strong></p>
+<ul>
+<li><p>There are several reasons why we chose this data-set. The first reason is that the data is well-formatted and is rich in variables, making it interesting for data wrangling and visualizing patterns.</p></li>
+<li><p>The second reason is the social media engagement and interest in this particular phenomenon.</p></li>
+<li><p>Lastly, UFO sightings hold a plethora of significance in scientific research, as humans have been wondering and searching for life outside Earth ever since the first telescope was discovered. In summary, it would be interesting to engage in discussions of mysteries of the cosmos and extraterrestrial life while also contributing to the cause with our visualizations.</p></li>
+</ul>
 </section>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
@@ -547,10 +507,23 @@ The downloaded binary packages are in
 <h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
 <p><strong>What is the geographic distribution of UFO sightings? Are there any hotspots where the number of sightings is prevalent? Is there any correlation between the location of the sighting and the shape of the UFO?</strong></p>
 <ul>
-<li>Our plan for tackling this question involves using the <code>ufo_sightings.csv</code> and the <code>places.csv</code>.</li>
-<li>The data will be then visualized, and the geographical locations of the sightings will be plotted on a map using the <code>ggplot2</code> package.</li>
-<li>The hotspots where the sightings are prevalent can also be visualized using the dataset.</li>
-<li>Then a stacked bar chart can be plotted to show the correlation between the location of the sightings and the shape of the UFO.</li>
+<li><p>At the beginning of the project, we will start off by cleaning and wrangling the data. All the data that might not be necessary for our workflow will be removed. We will also be adding and modifying data to the datasets that we have received from the TidyTuesday.</p></li>
+<li><p>FIRST QUESTION:</p>
+<ul>
+<li><p>Our first step with tackling the first question is to use the cleaned data to plot a heatmap of the world.</p></li>
+<li><p>We will group the data of the countries to find the number of sightings in each of the countries.</p></li>
+<li><p>Then, we will use the <code>ggmap</code> package of R to plot a heatmap of the world with this data.</p></li>
+<li><p>From there, we will work on zoning in on the United States. Figuring out theon cities where these sightings are prevalent. This will be done using <code>ggplot’s</code> geom_point feature, and the longitude and latitude columns. We will paste this plot over a realistic map of the United States, marking the cities where the density of the sightings are more prevalent.</p></li>
+<li><p>Then, we will visualize whether certain areas are more likely to report a certain shape. This will be done with a histogram, comparing the densities of the shapes for the states.</p></li>
+</ul></li>
+<li><p>SECOND QUESTION</p>
+<ul>
+<li><p>First, we will slice the `reported_date_time_utc` column, and separate the dates and times from it.</p></li>
+<li><p>Then we will clean data to handle all the various time zones and merge them accurately, which we have explained.</p></li>
+<li><p>Alongside this, we will work on grouping the dates, by their seasons (i.e.&nbsp;spring, summer, fall, winter)</p></li>
+<li><p>Using this data, we will plot a line chart to visualize the time series analysis of the seasonal data.</p></li>
+<li><p>For the plot to visualize whether astronomical events affect the sightings, we are going to be using a sunburst plot, which will be a part of the sunburstR package.</p></li>
+</ul></li>
 </ul>
 <p><em>Parameters used</em></p>
 <ul>
@@ -585,6 +558,17 @@ The downloaded binary packages are in
 <li><code>country_code</code></li>
 </ul></li>
 </ul>
+<section id="discuss-potential-biases." class="level3">
+<h3 class="anchored" data-anchor-id="discuss-potential-biases.">Discuss potential biases.</h3>
+<ul>
+<li><p>It is entirely possible that people in smaller cities with lesser knowledge of modern technology may have seen a plane or helicopter in the sky, and mistook it for a UFO. But at the same time, it is possible that they have seen a UFO and didn’t have the proper methods to report such a sighting.</p></li>
+<li><p>On the other hand, people in larger cities may not be able to clearly view these supposed “UFO sightings” due to various forms of pollution being more prevalent in these areas. But contrary to people in smaller cities, they may have the means to report the sightings quickly.</p></li>
+<li><p>We believe that although this would introduce bad data in the data-set, there isn’t a suitable solution to address this issue.</p></li>
+<li><p>But the shapes column in the ufo_sightings data-set can be a good way to filter out the data-sets, regardless of the location of the sightings.</p></li>
+<li><p>Shapes that are more commonly sighted will be more likely to actually be true, versus shapes that have one-off or just a few sightings.</p></li>
+<li><p>For example, the “cube” shape has only been sighted twice, which is improbable that it may be sighted correctly, because otherwise we would have seen more sightings of that shape in our data-set. On the other hand, the circle shape appears to be very likely as it has been sighted over 9000 times.</p></li>
+</ul>
+</section>
 </section>
 <section id="data-pre-processing" class="level2">
 <h2 class="anchored" data-anchor-id="data-pre-processing">Data Pre-processing</h2>
@@ -600,6 +584,25 @@ The downloaded binary packages are in
 <li><p>Remove the negative values from elevation column.</p></li>
 <li><p>Include only those cities where the population is more than 10000.</p></li>
 </ul>
+</section>
+<section id="timeline" class="level2">
+<h2 class="anchored" data-anchor-id="timeline">TIMELINE</h2>
+<ul>
+<li>Week-1</li>
+</ul>
+<p>Data Loading and Exploration - Load the data-set. Explore the structure and contents of each CSV file and identify any potential issues or inconsistencies in the data.</p>
+<p>Data Pre-processing - Cleaning of ufo_sightings.csv and places.csv data-set Filtering out observations and remove NA values from the shape and day_part columns.</p>
+<p>Time Zone Alignment- Develop a methodology for aligning sighting times with sunrise and sunset data. Executing the alignment procedure, making sure that time zone modifications are made accurately. Cross-reference the alignment with the times of known sunrise and sunset for particular areas to confirm it.</p>
+<ul>
+<li>Week-2</li>
+</ul>
+<p>Geographic Distribution Analysis - Plot sightings on a map using ggplot2. The cleaned data-sets will be used to visualize the geographic distribution of UFO sightings. We’ll identify hot-spots where sightings are prevalent and explore any correlations between sighting locations and UFO shapes. Seasonal Patterns Analysis - A time series plot can be created to visualize patterns in sightings over different seasons( winter, spring, summer, and fall) and will also investigate the impact of astronomical events on reported sightings.</p>
+<ul>
+<li>Week-3</li>
+</ul>
+<p>Final Analysis and Reporting.- Summarizing key findings from the geographic distribution and seasonal patterns analysis. Discuss any correlations observed. Prepare the visualizations and insights for presentation.</p>
+<p>Review - Review the analysis for accuracy and completeness, making any necessary revisions. Finalize the proposal and preparing for presentation</p>
+<p>On March 11 the Project will be ready for presentation.</p>
 
 
 </section>
