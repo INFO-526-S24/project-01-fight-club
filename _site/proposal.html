@@ -167,8 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#metadata-for-the-table-1-ufo-sightings" id="toc-metadata-for-the-table-1-ufo-sightings" class="nav-link" data-scroll-target="#metadata-for-the-table-1-ufo-sightings">Metadata for the Table 1 (UFO SIGHTINGS)</a></li>
   <li><a href="#metadata-for-the-table-2-places" id="toc-metadata-for-the-table-2-places" class="nav-link" data-scroll-target="#metadata-for-the-table-2-places">Metadata for the Table 2 (PLACES)</a></li>
   <li><a href="#metadata-for-the-table-3-day_part_map" id="toc-metadata-for-the-table-3-day_part_map" class="nav-link" data-scroll-target="#metadata-for-the-table-3-day_part_map">Metadata for the Table 3 (Day_part_map)</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
-  <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a>
+  <li><a href="#questions-and-analysis-plan" id="toc-questions-and-analysis-plan" class="nav-link" data-scroll-target="#questions-and-analysis-plan">Questions and Analysis plan</a>
   <ul class="collapse">
   <li><a href="#discuss-potential-biases." id="toc-discuss-potential-biases." class="nav-link" data-scroll-target="#discuss-potential-biases.">Discuss potential biases.</a></li>
   </ul></li>
@@ -226,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>package 'kableExtra' successfully unpacked and MD5 sums checked
 
 The downloaded binary packages are in
-    C:\Users\naiti\AppData\Local\Temp\RtmpMpXh9D\downloaded_packages</code></pre>
+    C:\Users\naiti\AppData\Local\Temp\RtmpwjwAGW\downloaded_packages</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
@@ -498,17 +497,11 @@ The downloaded binary packages are in
 <li><p>Lastly, UFO sightings hold a plethora of significance in scientific research, as humans have been wondering and searching for life outside Earth ever since the first telescope was discovered. In summary, it would be interesting to engage in discussions of mysteries of the cosmos and extraterrestrial life while also contributing to the cause with our visualizations.</p></li>
 </ul>
 </section>
-<section id="questions" class="level2">
-<h2 class="anchored" data-anchor-id="questions">Questions</h2>
-<p>Q.1) What is the geographic distribution of UFO sightings? Are there any hotspots where the number of sightings is prevalent? Is there any correlation between the location of the sighting and the shape of the UFO?</p>
-<p>Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?</p>
-</section>
-<section id="analysis-plan" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
+<section id="questions-and-analysis-plan" class="level2">
+<h2 class="anchored" data-anchor-id="questions-and-analysis-plan">Questions and Analysis plan</h2>
 <p><strong>What is the geographic distribution of UFO sightings? Are there any hotspots where the number of sightings is prevalent? Is there any correlation between the location of the sighting and the shape of the UFO?</strong></p>
 <ul>
-<li><p>At the beginning of the project, we will start off by cleaning and wrangling the data. All the data that might not be necessary for our workflow will be removed. We will also be adding and modifying data to the datasets that we have received from the TidyTuesday.</p></li>
-<li><p>FIRST QUESTION:</p>
+<li><p>At the beginning of the project, we will start off by cleaning and wrangling the data. All the data that might not be necessary for our workflow will be removed. We will also be adding and modifying data to the datasets that we have received from the TidyTuesday.</p>
 <ul>
 <li><p>Our first step with tackling the first question is to use the cleaned data to plot a heatmap of the world.</p></li>
 <li><p>We will group the data of the countries to find the number of sightings in each of the countries.</p></li>
@@ -516,14 +509,14 @@ The downloaded binary packages are in
 <li><p>From there, we will work on zoning in on the United States. Figuring out theon cities where these sightings are prevalent. This will be done using <code>ggplot’s</code> geom_point feature, and the longitude and latitude columns. We will paste this plot over a realistic map of the United States, marking the cities where the density of the sightings are more prevalent.</p></li>
 <li><p>Then, we will visualize whether certain areas are more likely to report a certain shape. This will be done with a histogram, comparing the densities of the shapes for the states.</p></li>
 </ul></li>
-<li><p>SECOND QUESTION</p>
+</ul>
+<p><strong>Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?</strong></p>
 <ul>
 <li><p>First, we will slice the `reported_date_time_utc` column, and separate the dates and times from it.</p></li>
 <li><p>Then we will clean data to handle all the various time zones and merge them accurately, which we have explained.</p></li>
 <li><p>Alongside this, we will work on grouping the dates, by their seasons (i.e.&nbsp;spring, summer, fall, winter)</p></li>
 <li><p>Using this data, we will plot a line chart to visualize the time series analysis of the seasonal data.</p></li>
 <li><p>For the plot to visualize whether astronomical events affect the sightings, we are going to be using a sunburst plot, which will be a part of the sunburstR package.</p></li>
-</ul></li>
 </ul>
 <p><em>Parameters used</em></p>
 <ul>

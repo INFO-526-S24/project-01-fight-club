@@ -149,19 +149,11 @@ metadata_ufo %>%
 
 -   Lastly, UFO sightings hold a plethora of significance in scientific research, as humans have been wondering and searching for life outside Earth ever since the first telescope was discovered. In summary, it would be interesting to engage in discussions of mysteries of the cosmos and extraterrestrial life while also contributing to the cause with our visualizations.
 
-## Questions
-
-Q.1) What is the geographic distribution of UFO sightings? Are there any hotspots where the number of sightings is prevalent? Is there any correlation between the location of the sighting and the shape of the UFO?
-
-Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?
-
-## Analysis plan
+## Questions and Analysis plan
 
 **What is the geographic distribution of UFO sightings? Are there any hotspots where the number of sightings is prevalent? Is there any correlation between the location of the sighting and the shape of the UFO?**
 
 -   At the beginning of the project, we will start off by cleaning and wrangling the data. All the data that might not be necessary for our workflow will be removed. We will also be adding and modifying data to the datasets that we have received from the TidyTuesday.
-
--   FIRST QUESTION:
 
     -   Our first step with tackling the first question is to use the cleaned data to plot a heatmap of the world.
 
@@ -173,17 +165,18 @@ Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical
 
     -   Then, we will visualize whether certain areas are more likely to report a certain shape. This will be done with a histogram, comparing the densities of the shapes for the states.
 
--   SECOND QUESTION
+**Q.2) Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?**
 
-    -   First, we will slice the \`reported_date_time_utc\` column, and separate the dates and times from it.
+-   First, we will slice the \`reported_date_time_utc\` column, and separate the dates and times from it.
 
-    -   Then we will clean data to handle all the various time zones and merge them accurately, which we have explained.
+-   Then we will clean data to handle all the various time zones and merge them accurately, which we have explained.
 
-    -   Alongside this, we will work on grouping the dates, by their seasons (i.e. spring, summer, fall, winter)
+-   Alongside this, we will work on grouping the dates, by their seasons (i.e. spring, summer, fall, winter)
 
-    -   Using this data, we will plot a line chart to visualize the time series analysis of the seasonal data.
+-   Using this data, we will plot a line chart to visualize the time series analysis of the seasonal data.
 
-    -   For the plot to visualize whether astronomical events affect the sightings, we are going to be using a sunburst plot, which will be a part of the sunburstR package.
+-   For the plot to visualize whether astronomical events affect the sightings, we are going to be using a sunburst plot, which will be a part of the sunburstR package.
+
 
 *Parameters used*
 
