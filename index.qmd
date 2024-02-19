@@ -1,11 +1,11 @@
 ---
-title: "Project title"
+title: "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data"
 subtitle: "INFO 526 - Project 1"
-author: "Team name"
+author: "Fight Club"
 format: html
 editor: visual
 ---
 
 ## Abstract
 
-Add project abstract here.
+The proposal of the project is in the Proposal tab.

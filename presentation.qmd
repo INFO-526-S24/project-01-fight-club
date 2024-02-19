@@ -1,6 +1,6 @@
 ---
-title: "Are Aliens Real?"
-subtitle: "INFO 526 - Fall 2023 - Project 1"
+title: "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data"
+subtitle: "INFO 526 - Spring 2024 - Project 1"
 author: "Agastya Deshraju, Usama Ahmed, Naitik Shah, Gorantla Sai Laasya, Divya Dhole, Lakshmi Anchula"
 title-slide-attributes:
   data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
