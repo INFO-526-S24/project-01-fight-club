@@ -174,8 +174,6 @@ We would need to do some data cleaning and pre-processing to improve the validit
 
 -   Remove the negative values from elevation column.
 
--   Include only those cities where the population is more than 10000.
-
 *Handling the accuracy of the time zones*
 
 -   The time zones in the `places` are first joined onto the `states` column in the `ufo_sightings` dataset.
@@ -188,15 +186,15 @@ We would need to do some data cleaning and pre-processing to improve the validit
 
 -   It is entirely possible that people in smaller cities with lesser knowledge of modern technology may have seen a plane or helicopter in the sky, and mistook it for a UFO. But at the same time, it is possible that they have seen a UFO and didn’t have the proper methods to report such a sighting.
 
--   On the other hand, people in larger cities may not be able to clearly view these supposed “UFO sightings” due to various forms of pollution being more prevalent in these areas. But contrary to people in smaller cities, they may have the means to report the sightings quickly.
+-   On the other hand, people in larger cities may not be able to clearly view these supposed “UFO sightings” due to air pollution and sky-scrapers being more prevalent in these areas. But contrary to people in smaller cities, they may have the means to report the sightings quickly.
 
--   We believe that although this would introduce bad data in the data-set, there isn’t a suitable solution to address this issue.
-
--   But the shapes column in the ufo_sightings data-set can be a good way to filter out the data-sets, regardless of the location of the sightings.
+-   We believe that although this would introduce bad data in the data-set, there isn’t a suitable solution to address this issue. But the shapes column in the ufo_sightings data-set can be a good way to filter out the data-sets, regardless of the location of the sightings.
 
 -   Shapes that are more commonly sighted will be more likely to actually be true, versus shapes that have one-off or just a few sightings.
 
 -   For example, the “cube” shape has only been sighted twice, which is improbable that it may be sighted correctly, because otherwise we would have seen more sightings of that shape in our data-set. On the other hand, the circle shape appears to be very likely as it has been sighted over 9000 times.
+
+-   Furthermore, in order to establish a correlation between UFO shapes and locations, we plan to run a chi-squared test that can quantify the strength and significance of these relationships.
 
 ## Questions and Analysis plan
 
@@ -243,7 +241,6 @@ We would need to do some data cleaning and pre-processing to improve the validit
     -   `timezone`
 -   `day_parts_map`
     -   All columns other than `rounded_lat` and `rounded_long`
-
 
 ## TIMELINE
 
