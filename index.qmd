@@ -8,4 +8,49 @@ editor: visual
 
 ## Abstract
 
-The proposal of the project is in the Proposal tab.
+1.  Our project embarks on a quest to analyze and visualize that might reveal the secrets hidden.
+2.  Armed with the powerful ggplot2 library, we embarked on a visual odyssey, crafting intricate visualizations that brought the geographic distribution of UFO sightings to life.
+3.  We explored the intriguing correlations between sightings location and the shapes of the reported UFO's, fueling our imaginations with visions of otherwordly visitors.
+4.  But our quest did not end there. We delved deeper into the temporal realm, analyzing seasonal patterns in sightings, seeking to unravel the mysteries that might lie hidden within the cycle of season.
+
+## Datasets and Key Variables
+
+The dataset records 80,000 observations.
+
+There are three datasets.
+
+-   ufo_sightings.csv
+
+    reported_date_time_utc, shape, city, state and country_code.
+
+-   places.csv
+
+    latitude, longitude, elevation and population.
+
+day_parts_map.csv
+
+Has all column other than rounded_lat and rounded_log.
+
+## Question-1
+
+code
+
+us_map
+
+heatmap
+
+histogram
+
+## Question-2
+
+Line chart
+
+sun burst
+
+--
+
+## Conclusion
+
+-   The geographic distribution analysis reveals hotspots of UFO sightings, particularly in certain areas of the United States, suggesting a correlation between location and UFO activity.
+
+-   Seasonal Analysis reveals potential patterns in UFO sightings, with variations across different times of the year, while examination of Astronomical events suggest a potential influence on reported sightings.
