@@ -13,6 +13,10 @@ editor: visual
 3.  We explored the intriguing correlations between sightings location and the shapes of the reported UFO's, fueling our imaginations with visions of otherwordly visitors.
 4.  But our quest did not end there. We delved deeper into the temporal realm, analyzing seasonal patterns in sightings, seeking to unravel the mysteries that might lie hidden within the cycle of season.
 
+## Introduction
+
+UFO sightings dataset - <https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20>. It provides a comprehensive compilation of UFO sightings worldwide.
+
 ## Datasets and Key Variables
 
 The dataset records 80,000 observations.
@@ -41,6 +45,8 @@ heatmap
 
 histogram
 
+**Analysis:**
+
 ## Question-2
 
 Line chart
@@ -48,6 +54,8 @@ Line chart
 sun burst
 
 --
+
+**Analysis:**
 
 ## Conclusion
 
