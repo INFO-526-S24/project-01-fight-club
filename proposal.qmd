@@ -174,14 +174,6 @@ We would need to do some data cleaning and pre-processing to improve the validit
 
 -   Remove the negative values from elevation column.
 
-*Handling the accuracy of the time zones*
-
--   The time zones in the `places` are first joined onto the `states` column in the `ufo_sightings` dataset.
-
--   From there, we can find the local times for each of the reported sightings.
-
--   We will also be rounding up or down the dates, depending on the times as this will help us merge the datasets with the `day_parts_map` dataset as well, using which we will infer if the astrononmical events have an effect on the sightings.
-
 #### Discuss potential biases.
 
 -   It is entirely possible that people in smaller cities with lesser knowledge of modern technology may have seen a plane or helicopter in the sky, and mistook it for a UFO. But at the same time, it is possible that they have seen a UFO and didn’t have the proper methods to report such a sighting.

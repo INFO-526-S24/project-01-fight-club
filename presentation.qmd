@@ -164,7 +164,48 @@ ggplotly(k, dynamicTicks = T)
 
 ```
 
-``` 
+```{r }
+#Question 1 Astronomical sightings bar chart.
+
+library(ggplot2)
+# Made a new dataframe df which has the number of sightings according to the day part.
+setDT(ufo_sightings_enriched)
+df <- ufo_sightings_enriched[, .(sightings = .N), day_part]
+View(df)
+
+# Now make a bar chart with the help of the df.
+
+library(ggplot2)
+
+# Assuming 'df' is your dataframe
+# Remove rows with NA values
+df <- na.omit(df)
+
+df$day_part <- gsub("night","Night",df$day_part)
+df$day_part <- gsub("nautical dusk","Nautical Dusk",df$day_part)
+df$day_part <- gsub("afternoon","Afternoon",df$day_part)
+df$day_part <- gsub("morning","Morning",df$day_part)
+df$day_part <- gsub("astronomical dusk","Astronomical Dusk",df$day_part)
+df$day_part <- gsub("civil dusk","Civil Dusk",df$day_part)
+df$day_part <- gsub("civil dawn","Civil Dawn",df$day_part)
+df$day_part <- gsub("nautical dawn","Nautical Dawn",df$day_part)
+df$day_part <- gsub("astronomical dawn","Astronomical Dawn",df$day_part)
+# Plot the data, bars in descending order by sightings
+ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
+  geom_bar(stat="identity") +
+  coord_flip() +
+  labs(title="UFO Sightings by Part of the Day",
+       x="Part of the Day",
+       y="Number of Sightings") +
+  theme_minimal() +
+  theme(legend.position="none",
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.minor = element_blank(),
+    
+    )
+
+
+```
 
 
 
