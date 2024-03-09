@@ -22,7 +22,14 @@ execute:
 
 # Load packages here
 pacman::p_load(tidymodels,
-               tidyverse)
+               tidyverse,
+               gganimate,
+               dplyr,
+               kableExtra,
+               lubridate
+               )
+
+
 
 ```
 
@@ -51,6 +58,123 @@ mtcars$speed <- mtcars$hp / mtcars$wt
 
 data("penguins")
 ```
+
+
+
+```{r, fig.width=14}
+
+#Question 2 Answer
+
+#Loading the Data from Github
+
+ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
+places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
+day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv')
+
+# Assuming ufo_sightings and places are already loaded as data frames
+ufo_sightings <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv")
+places <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv")
+
+# Merge on city and state, adjust columns as needed
+ufo_sightings_enriched <- left_join(ufo_sightings, places, by = c("city", "state"))
+
+##
+
+# Convert reported_date_time to Date
+ufo_sightings_enriched$reported_date <- as.Date(ufo_sightings_enriched$reported_date_time, format="%Y-%m-%dT%H:%M:%SZ")
+
+# Function to assign seasons based on dates
+get_season <- function(date) {
+  year <- format(date, "%Y")
+  start_spring <- as.Date(paste(year, "-03-21", sep=""))
+  start_summer <- as.Date(paste(year, "-06-21", sep=""))
+  start_autumn <- as.Date(paste(year, "-09-23", sep=""))
+  start_winter <- as.Date(paste(year, "-12-21", sep=""))
+  
+  if (date >= start_spring & date < start_summer) {
+    return('spring')
+  } else if (date >= start_summer & date < start_autumn) {
+    return('summer')
+  } else if (date >= start_autumn & date < start_winter) {
+    return('autumn')
+  } else {
+    return('winter')
+  }
+}
+
+# Apply the season function to the sightings data
+ufo_sightings_enriched$season <- sapply(ufo_sightings_enriched$reported_date, get_season)
+
+
+
+## Step 2: Analyze Seasonal Patterns
+
+# Calculate the number of sightings for each season
+season_distribution <- table(ufo_sightings_enriched$season)
+
+# Print season distribution
+print(season_distribution)
+
+  
+# Assume day_parts_map is loaded
+day_parts_map <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv")
+
+#Step 4: Visualize the Data
+
+ggplot(ufo_sightings_enriched, aes(x=season)) +
+  geom_bar() +
+  xlab("Season") + ylab("Count of UFO Sightings") +
+  ggtitle("UFO Sightings by Season")
+
+# Assuming your 'ufo_sightings' dataset has a 'reported_date_time_utc' column
+ufo_sightings$reported_date_time_utc <- as.POSIXct(ufo_sightings$reported_date_time_utc, format="%Y-%m-%dT%H:%M:%SZ", tz="UTC")
+
+library(ggplot2)
+library(dplyr)
+
+# Aggregate data by season and year for plotting
+seasonal_counts <- ufo_sightings_enriched |>
+  group_by(season, year = format(reported_date_time_utc, "%d %B %Y")) |>
+    summarize(count = n(), .groups = 'drop')
+
+seasonal_counts <- subset(seasonal_counts, year >= '1973')
+
+# Plot
+p <- ggplot(seasonal_counts, aes(x=year, y=count, color=season, group=1)) +
+  geom_line() +
+  labs(title="UFO Sightings by Season Over Years",
+       x="Year",
+       y="Number of Sightings",
+       color = "Season") + 
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 0),
+        plot.title.position = "plot",
+        legend.position = "top") +
+  transition_reveal(year) +
+  ease_aes("linear")
+
+animate(p, renderer = gifski_renderer(), height = 400, width = 600, duration = 5, fps = 10)
+
+ggplotly(k, dynamicTicks = T)
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Using Quarto for presentations
 
@@ -83,6 +207,7 @@ or in two columns
 ## Code
 
 ```{r, echo=FALSE}
+
 model <- lm(mpg ~ speed, data = mtcars) 
 
 model |> tidy()
@@ -163,3 +288,4 @@ Limitations:
 -   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
 
 -   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+
