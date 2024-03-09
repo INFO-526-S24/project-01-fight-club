@@ -155,6 +155,7 @@ p <- ggplot(seasonal_counts, aes(x=year, y=count, color=season, group=1)) +
   transition_reveal(year) +
   ease_aes("linear")
 
+
 animate(p, renderer = gifski_renderer(), height = 400, width = 600, duration = 5, fps = 10)
 
 ggplotly(k, dynamicTicks = T)
@@ -163,6 +164,7 @@ ggplotly(k, dynamicTicks = T)
 
 ```
 
+``` 
 
 
 

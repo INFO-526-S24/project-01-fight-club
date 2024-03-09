@@ -115,36 +115,36 @@
     "objectID": "presentation.html#quarto",
     "href": "presentation.html#quarto",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "",
-    "text": "The presentation is created using the Quarto CLI\n## sets the start of a new slide"
+    "section": "Quarto",
+    "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
   },
   {
     "objectID": "presentation.html#layouts",
     "href": "presentation.html#layouts",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "",
-    "text": "You can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis"
+    "section": "Layouts",
+    "text": "Layouts\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\nAnd add footnotes"
   },
   {
     "objectID": "presentation.html#code",
     "href": "presentation.html#code",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "",
-    "text": "# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
+    "section": "Code",
+    "text": "Code\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
   },
   {
     "objectID": "presentation.html#plots",
     "href": "presentation.html#plots",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "",
-    "text": "Warning: Removed 2 rows containing missing values (`geom_point()`)."
+    "section": "Plots",
+    "text": "Plots"
   },
   {
     "objectID": "presentation.html#plot-and-text",
     "href": "presentation.html#plot-and-text",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "",
-    "text": "Some text\ngoes here"
+    "section": "Plot and text",
+    "text": "Plot and text\n\n\n\nSome text\ngoes here"
   },
   {
     "objectID": "presentation.html#tables",
@@ -158,7 +158,7 @@
     "href": "presentation.html#images",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
     "section": "Images",
-    "text": "Images\n\n\n\nImage credit: Danielle Navarro, Percolate."
+    "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
   },
   {
     "objectID": "presentation.html#math-expressions",
@@ -201,5 +201,12 @@
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
     "section": "Why did you choose this data-set?",
     "text": "Why did you choose this data-set?\n\nThere are several reasons why we chose this data-set. The first reason is that the data is well-formatted and is rich in variables, making it interesting for data wrangling and visualizing patterns.\nThe second reason is the social media engagement and interest in this particular phenomenon.\nLastly, UFO sightings hold a plethora of significance in scientific research, as humans have been wondering and searching for life outside Earth ever since the first telescope was discovered. In summary, it would be interesting to engage in discussions of mysteries of the cosmos and extraterrestrial life while also contributing to the cause with our visualizations."
+  },
+  {
+    "objectID": "presentation.html#new-slide",
+    "href": "presentation.html#new-slide",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "New slide",
+    "text": "New slide\nblah blah blah"
   }
 ]
