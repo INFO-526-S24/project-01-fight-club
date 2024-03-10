@@ -26,11 +26,14 @@ pacman::p_load(tidymodels,
                gganimate,
                dplyr,
                kableExtra,
-               lubridate
-               )
-
-
-
+               lubridate,
+               data.table,
+               gganimate,
+               ggimage,
+               png,
+               here,
+               grid,
+               plotly)
 ```
 
 ```{r}
@@ -49,39 +52,31 @@ knitr::opts_chunk$set(
   )
 ```
 
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 #| label: load-data
 #| include: false
-# Load data here
-data(mtcars)
-mtcars$speed <- mtcars$hp / mtcars$wt
 
-data("penguins")
-```
-
-
-
-```{r, fig.width=14}
-
-#Question 2 Answer
-
-#Loading the Data from Github
 
 ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
 places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
 day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv')
 
-# Assuming ufo_sightings and places are already loaded as data frames
-ufo_sightings <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv")
-places <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv")
+```
 
-# Merge on city and state, adjust columns as needed
-ufo_sightings_enriched <- left_join(ufo_sightings, places, by = c("city", "state"))
 
-##
 
-# Convert reported_date_time to Date
-ufo_sightings_enriched$reported_date <- as.Date(ufo_sightings_enriched$reported_date_time, format="%Y-%m-%dT%H:%M:%SZ")
+```{r, dev='ragg_png'}
+
+ufo_sightings <- left_join(ufo_sightings, places, by = c("city", 
+                                                         "state",
+                                                         "country_code"))
+
+ufo_sightings <- ufo_sightings |> 
+  filter(!is.na(shape) & shape != "other" & shape != "unknown")
+
+ufo_sightings$decade <- as.integer(format(ufo_sightings$reported_date_time_utc, "%Y")) - as.integer(format(ufo_sightings$reported_date_time_utc, "%Y")) %% 10
+
+ufo_sightings$reported_date <- as.Date(ufo_sightings$reported_date_time, format="%Y-%m-%dT%H:%M:%SZ")
 
 # Function to assign seasons based on dates
 get_season <- function(date) {
@@ -102,110 +97,57 @@ get_season <- function(date) {
   }
 }
 
-# Apply the season function to the sightings data
-ufo_sightings_enriched$season <- sapply(ufo_sightings_enriched$reported_date, get_season)
+ufo_sightings$season <- sapply(ufo_sightings$reported_date, get_season)
+
+ufo_sightings$season_emoji <- case_when(
+      ufo_sightings$season == "winter" ~ "❄️",
+      ufo_sightings$season == "spring" ~ "⛅️️",
+      ufo_sightings$season == "summer" ~ "☀️",
+      ufo_sightings$season == "autumn"   ~ "☂️",
+      TRUE ~ "Null")
+
+grouped_data <- ufo_sightings |>
+  group_by(decade,season,season_emoji) |>
+  summarise(sightings = n())
+
+image <- readPNG(here("images","ufo_background_image.png"))
 
 
-
-## Step 2: Analyze Seasonal Patterns
-
-# Calculate the number of sightings for each season
-season_distribution <- table(ufo_sightings_enriched$season)
-
-# Print season distribution
-print(season_distribution)
-
-  
-# Assume day_parts_map is loaded
-day_parts_map <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv")
-
-#Step 4: Visualize the Data
-
-ggplot(ufo_sightings_enriched, aes(x=season)) +
-  geom_bar() +
-  xlab("Season") + ylab("Count of UFO Sightings") +
-  ggtitle("UFO Sightings by Season")
-
-# Assuming your 'ufo_sightings' dataset has a 'reported_date_time_utc' column
-ufo_sightings$reported_date_time_utc <- as.POSIXct(ufo_sightings$reported_date_time_utc, format="%Y-%m-%dT%H:%M:%SZ", tz="UTC")
-
-library(ggplot2)
-library(dplyr)
-
-# Aggregate data by season and year for plotting
-seasonal_counts <- ufo_sightings_enriched |>
-  group_by(season, year = format(reported_date_time_utc, "%d %B %Y")) |>
-    summarize(count = n(), .groups = 'drop')
-
-seasonal_counts <- subset(seasonal_counts, year >= '1973')
-
-# Plot
-p <- ggplot(seasonal_counts, aes(x=year, y=count, color=season, group=1)) +
-  geom_line() +
-  labs(title="UFO Sightings by Season Over Years",
-       x="Year",
+ggplot(grouped_data, aes(x=decade, y=sightings, color=season)) +
+  annotation_custom(rasterGrob(image),
+                    xmin=-Inf,
+                    xmax=Inf,
+                    ymin=-Inf,
+                    ymax=Inf) +
+  geom_line(linewidth = 0.8) +
+  geom_text(aes(label = season_emoji), size = 6) +
+  scale_y_continuous(breaks = seq(0,16000,2000)) +
+  scale_x_continuous(breaks = seq(1920,2020,10)) +
+  labs(title="UFO sightings by season over years",
+       x="Decade",
        y="Number of Sightings",
-       color = "Season") + 
-  theme_minimal() +
+       color = "Season",
+       subtitle = "Sightings by each decade") +
   theme(panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
-        axis.text.x = element_text(angle = 90, hjust = 0),
         plot.title.position = "plot",
-        legend.position = "top") +
-  transition_reveal(year) +
-  ease_aes("linear")
+        legend.position = "top",
+        axis.text.x = element_text(size = 10),
+        plot.title = element_text(size = 20),
+        plot.subtitle = element_text(size = 15),
+        axis.text.y = element_text(size = 10),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(color = "black",
+                                          linewidth = 0.5,
+                                          linetype = "dotted"),
+        panel.background = element_blank(), 
+        panel.ontop = TRUE) 
 
-
-animate(p, renderer = gifski_renderer(), height = 400, width = 600, duration = 5, fps = 10)
-
-ggplotly(k, dynamicTicks = T)
-
-
-
-```
-
-```{r }
-#Question 1 Astronomical sightings bar chart.
-
-library(ggplot2)
-# Made a new dataframe df which has the number of sightings according to the day part.
-setDT(ufo_sightings_enriched)
-df <- ufo_sightings_enriched[, .(sightings = .N), day_part]
-View(df)
-
-# Now make a bar chart with the help of the df.
-
-library(ggplot2)
-
-# Assuming 'df' is your dataframe
-# Remove rows with NA values
-df <- na.omit(df)
-
-df$day_part <- gsub("night","Night",df$day_part)
-df$day_part <- gsub("nautical dusk","Nautical Dusk",df$day_part)
-df$day_part <- gsub("afternoon","Afternoon",df$day_part)
-df$day_part <- gsub("morning","Morning",df$day_part)
-df$day_part <- gsub("astronomical dusk","Astronomical Dusk",df$day_part)
-df$day_part <- gsub("civil dusk","Civil Dusk",df$day_part)
-df$day_part <- gsub("civil dawn","Civil Dawn",df$day_part)
-df$day_part <- gsub("nautical dawn","Nautical Dawn",df$day_part)
-df$day_part <- gsub("astronomical dawn","Astronomical Dawn",df$day_part)
-# Plot the data, bars in descending order by sightings
-ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
-  geom_bar(stat="identity") +
-  coord_flip() +
-  labs(title="UFO Sightings by Part of the Day",
-       x="Part of the Day",
-       y="Number of Sightings") +
-  theme_minimal() +
-  theme(legend.position="none",
-    panel.grid.major = element_blank(), # Remove major grid lines
-    panel.grid.minor = element_blank(),
-    
-    )
 
 
 ```
+
+``` 
 
 
 
@@ -249,86 +191,86 @@ or in two columns
 
 ## Code
 
-```{r, echo=FALSE}
+<!-- ```{r, echo=FALSE} -->
 
-model <- lm(mpg ~ speed, data = mtcars) 
+<!-- model <- lm(mpg ~ speed, data = mtcars)  -->
 
-model |> tidy()
+<!-- model |> tidy() -->
 
-model |> glance()
+<!-- model |> glance() -->
 
-```
+<!-- ``` -->
 
-## Plots
+<!-- ## Plots -->
 
-```{r}
-penguins |>
-  mutate(species = ifelse(species == "Adelie", "Adelie", "Other")) |>
-  ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
-  geom_point()
-```
+<!-- ```{r} -->
+<!-- penguins |> -->
+<!--   mutate(species = ifelse(species == "Adelie", "Adelie", "Other")) |> -->
+<!--   ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species)) + -->
+<!--   geom_point() -->
+<!-- ``` -->
 
-## Plot and text
+<!-- ## Plot and text -->
 
-::: columns
-::: {.column width="50%"}
--   Some text
+<!-- ::: columns -->
+<!-- ::: {.column width="50%"} -->
+<!-- -   Some text -->
 
--   goes here
-:::
+<!-- -   goes here -->
+<!-- ::: -->
 
-::: {.column width="50%"}
-```{r, warning=FALSE, fig.width=5.5}
-penguins |>
-  ggplot(aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot(linewidth = 0.75,
-               outlier.size = 2.5) +
-  theme_minimal(base_size = 15) +
-  theme(legend.key.size = unit(0.8, "cm"))
-```
-:::
-:::
+<!-- ::: {.column width="50%"} -->
+<!-- ```{r, warning=FALSE, fig.width=5.5} -->
+<!-- penguins |> -->
+<!--   ggplot(aes(x = bill_length_mm, y = species, color = species)) + -->
+<!--   geom_boxplot(linewidth = 0.75, -->
+<!--                outlier.size = 2.5) + -->
+<!--   theme_minimal(base_size = 15) + -->
+<!--   theme(legend.key.size = unit(0.8, "cm")) -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- ::: -->
 
-# A new section...
+<!-- # A new section... -->
 
-## Tables
+<!-- ## Tables -->
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+<!-- If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g., -->
 
-```{r}
-penguins |> 
-  head() |>
-  kableExtra::kable() |>
-  kableExtra::kable_styling()
-```
+<!-- ```{r} -->
+<!-- penguins |>  -->
+<!--   head() |> -->
+<!--   kableExtra::kable() |> -->
+<!--   kableExtra::kable_styling() -->
+<!-- ``` -->
 
-## Images
+<!-- ## Images -->
 
-![Image credit: Danielle Navarro, Percolate.](images/watercolour_sys02_img34_teacup-ocean.png){fig-align="center" width="500"}
+<!-- ![Image credit: Danielle Navarro, Percolate.](images/watercolour_sys02_img34_teacup-ocean.png){fig-align="center" width="500"} -->
 
-## Math Expressions {.smaller}
+<!-- ## Math Expressions {.smaller} -->
 
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\alpha+\\beta\$ renders $\alpha + \beta$. You can use the display style with double dollar signs:
+<!-- You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\alpha+\\beta\$ renders $\alpha + \beta$. You can use the display style with double dollar signs: -->
 
-```         
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
+<!-- ```          -->
+<!-- $$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$ -->
+<!-- ``` -->
 
-$$
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-$$
+<!-- $$ -->
+<!-- \bar{X}=\frac{1}{n}\sum_{i=1}^nX_i -->
+<!-- $$ -->
 
-Limitations:
+<!-- Limitations: -->
 
-1.  The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
+<!-- 1.  The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character; -->
 
-2.  There should not be spaces after the opening `$` or before the closing `$`.
+<!-- 2.  There should not be spaces after the opening `$` or before the closing `$`. -->
 
-# Wrap up
+<!-- # Wrap up -->
 
-## Feeling adventurous?
+<!-- ## Feeling adventurous? -->
 
--   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
+<!-- -   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation. -->
 
--   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+<!-- -   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs. -->
 
