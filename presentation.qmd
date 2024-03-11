@@ -72,7 +72,7 @@ day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascie
 
 ## Data Set
 
-The dataset records 80,000 observations and is extracted from tidy tuesday.
+The dataset records 80,000 observations and is extracted from Tidy Tuesday.
 
 <https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-06-20/readme.md>
 
