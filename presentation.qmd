@@ -68,6 +68,7 @@ day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascie
 ```
 
 ## Heatmap Distribution of UFO Sightings
+
 ```{r}
 #| warning: FALSE
 #| echo: FALSE
@@ -105,7 +106,6 @@ places_location_data$country <- tolower(places_location_data$country)
 world_map$country <- tolower(world_map$country)
 ```
 
-
 ```{r}
 #| warning: FALSE
 #| echo: FALSE
@@ -131,7 +131,6 @@ heatmap_data$sighting_count_range <- factor(heatmap_data$sighting_count_range,
 
 ```
 
-
 ```{r, fig.width=10, fig.asp=0.7,fig.align='center'}
 color_scale_values = c("<1" = "#D8FAFD", 
                        "1-29" = "#8FFAFD", 
@@ -150,6 +149,7 @@ ggplot() +
 ```
 
 ## UFO Sighting Distribution Around the World
+
 ```{r}
 us_places_data <- places |>
   select(state, country, country_code, latitude, longitude)
@@ -158,7 +158,6 @@ us_places_data <- us_places_data |>
 us_places_data <- us_places_data |>
   filter(country_code == "US")
 ```
-
 
 ```{r, fig.align='center'}
 map_plot <- leaflet(data = us_places_data) |>
@@ -195,8 +194,6 @@ shape_counts <- shapes_filtered |>
   count(shape)
 ```
 
-
-
 ```{r fig.width=13,fig.height=9,fig.align='center', warning=FALSE}
 ggplot(shape_counts, aes(x = n, y = shape)) +
   geom_bar(stat = "identity", fill=alpha("#0023F5", 0.5)) +
@@ -212,7 +209,9 @@ ggplot(shape_counts, aes(x = n, y = shape)) +
  
 ```
 
-##
+## UFO Sightings By Season For Each Decade
+ 
+
 ```{r, dev='ragg_png', fig.width=10,fig.height=6.5,fig.align='center', warning = FALSE, message=FALSE}
 
 # Time-series plot by season (Usama)
@@ -291,7 +290,7 @@ ggplot(grouped_data, aes(x=decade, y=sightings, color=season)) +
 
 ```
 
-## 
+## UFO Sightings by Part of Day
 
 ```{r,  fig.width=10,fig.height=6.5,fig.align='center'}
 
