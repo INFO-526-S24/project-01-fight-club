@@ -1,0 +1,184 @@
+---
+title: "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data"
+subtitle: "INFO 526 - Spring 2024 - Project 1"
+author: "Agastya Deshraju, Usama Ahmed, Naitik Shah, Gorantla Sai Laasya, Divya Dhole, Lakshmi Anchula"
+title-slide-attributes:
+  data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
+  data-background-size: stretch
+  data-background-opacity: "0.7"
+  data-slide-number: none
+format:
+  revealjs:
+    theme:  ['data/customtheming.scss']
+  
+editor: visual
+execute:
+  echo: false
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+# Load packages here
+pacman::p_load(tidymodels,
+               tidyverse,
+               gganimate,
+               dplyr,
+               kableExtra,
+               lubridate,
+               data.table,
+               gganimate,
+               ggimage,
+               png,
+               here,
+               grid,
+               plotly)
+```
+
+```{r}
+#| label: setup
+#| include: false
+
+# Plot theme
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
+
+# For better figure resolution
+knitr::opts_chunk$set(
+  fig.retina = 3, 
+  dpi = 300, 
+  fig.width = 6, 
+  fig.asp = 0.618 
+  )
+```
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+#| label: load-data
+#| include: false
+
+
+ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
+places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
+day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv')
+
+```
+
+```{r, dev='ragg_png', fig.width=10,fig.height=6.5,fig.align='center'}
+
+# Time-series plot by season (Usama)
+
+ufo_sightings <- left_join(ufo_sightings, places, by = c("city", 
+                                                         "state",
+                                                         "country_code"))
+
+ufo_sightings <- ufo_sightings |> 
+  filter(!is.na(shape) & shape != "other" & shape != "unknown")
+
+ufo_sightings$decade <- as.integer(format(ufo_sightings$reported_date_time_utc, "%Y")) - as.integer(format(ufo_sightings$reported_date_time_utc, "%Y")) %% 10
+
+ufo_sightings$reported_date <- as.Date(ufo_sightings$reported_date_time, format="%Y-%m-%dT%H:%M:%SZ")
+
+get_season <- function(date) {
+  year <- format(date, "%Y")
+  start_spring <- as.Date(paste(year, "-03-21", sep=""))
+  start_summer <- as.Date(paste(year, "-06-21", sep=""))
+  start_autumn <- as.Date(paste(year, "-09-23", sep=""))
+  start_winter <- as.Date(paste(year, "-12-21", sep=""))
+  
+  if (date >= start_spring & date < start_summer) {
+    return('spring')
+  } else if (date >= start_summer & date < start_autumn) {
+    return('summer')
+  } else if (date >= start_autumn & date < start_winter) {
+    return('autumn')
+  } else {
+    return('winter')
+  }
+}
+
+ufo_sightings$season <- sapply(ufo_sightings$reported_date, get_season)
+
+ufo_sightings$season_emoji <- case_when(
+      ufo_sightings$season == "winter" ~ "❄️",
+      ufo_sightings$season == "spring" ~ "⛅️️",
+      ufo_sightings$season == "summer" ~ "☀️",
+      ufo_sightings$season == "autumn"   ~ "☂️",
+      TRUE ~ "Null")
+
+grouped_data <- ufo_sightings |>
+  group_by(decade,season,season_emoji) |>
+  summarise(sightings = n())
+
+image <- readPNG(here("images","ufo_background_image.png"))
+
+
+ggplot(grouped_data, aes(x=decade, y=sightings, color=season)) +
+  annotation_custom(rasterGrob(image),
+                    xmin=-Inf,
+                    xmax=Inf,
+                    ymin=-Inf,
+                    ymax=Inf) +
+  geom_line(linewidth = 0.8) +
+  geom_text(aes(label = season_emoji)) +
+  scale_y_continuous(breaks = seq(0,14000,2000)) +
+  scale_x_continuous(breaks = seq(1920,2020,10)) +
+  theme_minimal() +
+  labs(title="UFO sightings by season over years",
+       x="Decade",
+       y="Number of Sightings",
+       subtitle = "Sightings by each decade from 1920 till 2020",
+       color = "Season") +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        plot.title.position = "plot",
+        legend.position = "none",
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(color = "black",
+                                          linewidth = 0.5,
+                                          linetype = "dotted"),
+        panel.background = element_blank(), 
+        panel.ontop = TRUE) 
+
+```
+
+
+##
+
+```{r,  fig.width=10,fig.height=6.5,fig.align='center'}
+
+# Ufo sightings by part of the day (Naitik)
+
+setDT(ufo_sightings)
+df <- ufo_sightings[, .(sightings = .N), day_part]
+View(df)
+
+df <- na.omit(df)
+
+df$day_part <- gsub("night","Night",df$day_part)
+df$day_part <- gsub("nautical dusk","Nautical Dusk",df$day_part)
+df$day_part <- gsub("afternoon","Afternoon",df$day_part)
+df$day_part <- gsub("morning","Morning",df$day_part)
+df$day_part <- gsub("astronomical dusk","Astronomical Dusk",df$day_part)
+df$day_part <- gsub("civil dusk","Civil Dusk",df$day_part)
+df$day_part <- gsub("civil dawn","Civil Dawn",df$day_part)
+df$day_part <- gsub("nautical dawn","Nautical Dawn",df$day_part)
+df$day_part <- gsub("astronomical dawn","Astronomical Dawn",df$day_part)
+
+
+ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
+  geom_bar(stat="identity") +
+  coord_flip() +
+  labs(title="UFO Sightings by Part of the Day",
+       x="Part of the Day",
+       y="Number of Sightings") +
+  theme_minimal() +
+  theme(legend.position="none",
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank(),
+    )
+
+
+
+
+```
+

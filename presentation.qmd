@@ -143,7 +143,8 @@ ggplot(grouped_data, aes(x=decade, y=sightings, color=season)) +
 
 ```
 
-```{r}
+##
+```{r,  fig.width=10,fig.height=6.5,fig.align='center'}
 
 # Ufo sightings by part of the day (Naitik)
 
@@ -162,7 +163,8 @@ df$day_part <- gsub("civil dusk","Civil Dusk",df$day_part)
 df$day_part <- gsub("civil dawn","Civil Dawn",df$day_part)
 df$day_part <- gsub("nautical dawn","Nautical Dawn",df$day_part)
 df$day_part <- gsub("astronomical dawn","Astronomical Dawn",df$day_part)
-# Plot the data, bars in descending order by sightings
+
+
 ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
   geom_bar(stat="identity") +
   coord_flip() +
