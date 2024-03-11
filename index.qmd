@@ -101,11 +101,17 @@ Embarking on a quest to uncover the geographic footprint of UFO sightings, we de
 
 4.  **Time-series Plot by Season**: Exploring potential seasonal patterns, the approach categorizes sightings by season and plots the number of sightings over decades. Using emojis to represent seasons adds a human touch to the visualization, making it more engaging. This analysis aims to uncover any recurring patterns or fluctuations in sightings across different seasons over time.
 
-    ```{r}
-    #| warning: FALSE} #| echo: FALSE 
-    #|  output: FALSE   
-    places_location_data <- places |>   select(state, country, latitude, longitude)   places_location_data <- places_location_data %>%   group_by(country) %>%    summarise(sighting_count = n()) %>%   ungroup()
-    ```
+```{r}
+#| warning: FALSE
+#| echo: FALSE 
+#| output: FALSE   
+  places_location_data <- places |>
+  select(state, country, latitude, longitude)
+  
+  places_location_data <- places_location_data %>%
+  group_by(country) %>%  summarise(sighting_count = n()) %>%  ungroup()
+
+```
 
 ```{r}
 

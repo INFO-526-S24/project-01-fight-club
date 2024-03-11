@@ -2,13 +2,13 @@ project:
   type: website
 
 website:
-  title: Project Title
+  title: UFO Sightings
   navbar:
     right:
       - icon: github
-        href: https://github.com/INFO526-DataViz/project-01
+        href: https://info-526-s24.github.io/project-01-fight-club/
     left:
-      - text: Project
+      - text: Home Page
         href: index.qmd
       - text: Proposal
         href: proposal.qmd

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.538">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project Title - Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data</title>
+<title>UFO Sightings - Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Project Title</span>
+    <span class="navbar-title">UFO Sightings</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Project</span></a>
+<span class="menu-text">Home Page</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./proposal.html" aria-current="page"> 
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/INFO526-DataViz/project-01"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://info-526-s24.github.io/project-01-fight-club/"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -563,24 +563,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><em>places.csv:</em></p>
 <ul>
-<li><p>Remove the negative values from elevation column.</p></li>
-<li><p>Include only those cities where the population is more than 10000.</p></li>
-</ul>
-<p><em>Handling the accuracy of the time zones</em></p>
-<ul>
-<li><p>The time zones in the <code>places</code> are first joined onto the <code>states</code> column in the <code>ufo_sightings</code> dataset.</p></li>
-<li><p>From there, we can find the local times for each of the reported sightings.</p></li>
-<li><p>We will also be rounding up or down the dates, depending on the times as this will help us merge the datasets with the <code>day_parts_map</code> dataset as well, using which we will infer if the astrononmical events have an effect on the sightings.</p></li>
+<li>Remove the negative values from elevation column.</li>
 </ul>
 <section id="discuss-potential-biases." class="level4">
 <h4 class="anchored" data-anchor-id="discuss-potential-biases.">Discuss potential biases.</h4>
 <ul>
 <li><p>It is entirely possible that people in smaller cities with lesser knowledge of modern technology may have seen a plane or helicopter in the sky, and mistook it for a UFO. But at the same time, it is possible that they have seen a UFO and didn’t have the proper methods to report such a sighting.</p></li>
-<li><p>On the other hand, people in larger cities may not be able to clearly view these supposed “UFO sightings” due to various forms of pollution being more prevalent in these areas. But contrary to people in smaller cities, they may have the means to report the sightings quickly.</p></li>
-<li><p>We believe that although this would introduce bad data in the data-set, there isn’t a suitable solution to address this issue.</p></li>
-<li><p>But the shapes column in the ufo_sightings data-set can be a good way to filter out the data-sets, regardless of the location of the sightings.</p></li>
+<li><p>On the other hand, people in larger cities may not be able to clearly view these supposed “UFO sightings” due to air pollution and sky-scrapers being more prevalent in these areas. But contrary to people in smaller cities, they may have the means to report the sightings quickly.</p></li>
+<li><p>We believe that although this would introduce bad data in the data-set, there isn’t a suitable solution to address this issue. But the shapes column in the ufo_sightings data-set can be a good way to filter out the data-sets, regardless of the location of the sightings.</p></li>
 <li><p>Shapes that are more commonly sighted will be more likely to actually be true, versus shapes that have one-off or just a few sightings.</p></li>
 <li><p>For example, the “cube” shape has only been sighted twice, which is improbable that it may be sighted correctly, because otherwise we would have seen more sightings of that shape in our data-set. On the other hand, the circle shape appears to be very likely as it has been sighted over 9000 times.</p></li>
+<li><p>Furthermore, in order to establish a correlation between UFO shapes and locations, we plan to run a chi-squared test that can quantify the strength and significance of these relationships.</p></li>
 </ul>
 </section>
 </section>
@@ -812,7 +805,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {

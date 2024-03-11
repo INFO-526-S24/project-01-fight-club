@@ -194,8 +194,6 @@ map_plot
 
 ## Variance of Shape Sightings
 
-<div class="scrollable-content">
-
 ```{r,echo=FALSE , fig.width=13,fig.height=9,fig.align='center', warning=FALSE}
 shapes_filtered <- ufo_sightings |>
   select(city, state, country_code, shape) |>
@@ -223,7 +221,6 @@ ggplot(shape_counts, aes(x = n, y = shape)) +
 ```
 
 ![](images/shape2.png)
-</div>
 
 ## UFO Sightings By Season For Each Decade
 
