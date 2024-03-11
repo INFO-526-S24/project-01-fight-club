@@ -75,6 +75,8 @@ The dataset records 80,000 observations and is extracted from tidy tuesday.
 
 <https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-06-20/readme.md>
 
+The three datasets are as follows :
+
 -   **ufo_sightings.csv**
 
 -   **places.csv**
@@ -191,7 +193,12 @@ map_plot
 
 ## Variance of Shape Sightings
 
-```{r}
+```{}
+```
+
+::: columns
+::: {.column width="50%"}
+```{r,echo=FALSE , fig.width=13,fig.height=9,fig.align='center', warning=FALSE}
 shapes_filtered <- ufo_sightings |>
   select(city, state, country_code, shape) |>
   filter(shape != "other" & shape != "unknown")
@@ -201,14 +208,10 @@ shapes_filtered <- shapes_filtered |>
   group_by(shape) |>
   filter(dplyr::n() > 1500) |>
   ungroup()
-```
 
-```{r}
 shape_counts <- shapes_filtered |>
   count(shape)
-```
 
-```{r fig.width=13,fig.height=9,fig.align='center', warning=FALSE}
 ggplot(shape_counts, aes(x = n, y = shape)) +
   geom_bar(stat = "identity", fill=alpha("#0023F5", 0.5)) +
   xlim(-2000, 19000) +
@@ -219,9 +222,13 @@ ggplot(shape_counts, aes(x = n, y = shape)) +
     axis.title.y = element_blank(),
     axis.title.x = element_blank(),
     axis.text.x = element_text(size = 15))
-  
- 
 ```
+:::
+
+::: {.column width="50%"}
+\![Your Image\](images/shapes2.png)
+:::
+:::
 
 ## UFO Sightings By Season For Each Decade
 
@@ -347,4 +354,4 @@ ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
 
 ## Thank You
 
-\![Thanks GIF\](images/Thanks.gif)
+\![Thanks GIF\] (images/Thanks.gif)
