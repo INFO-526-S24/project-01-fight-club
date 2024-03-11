@@ -1,15 +1,17 @@
 ---
 title: "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data"
 subtitle: "INFO 526 - Spring 2024 - Project 1"
-author: "Agastya Deshraju, Usama Ahmed, Naitik Shah, Gorantla Sai Laasya, Divya Dhole, Lakshmi Anchula"
+author: "Fight Club"
 title-slide-attributes:
-  data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
+  data-background-image: images/ufo.jpg
   data-background-size: stretch
-  data-background-opacity: "0.7"
+  data-background-opacity: "0.8"
   data-slide-number: none
 format:
   revealjs:
     theme:  ['data/customtheming.scss']
+    transition: slide
+    background-transition: zoom
   
 editor: visual
 execute:
@@ -66,6 +68,18 @@ places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tid
 day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/day_parts_map.csv')
 
 ```
+
+## Data Set
+
+The dataset records 80,000 observations and is extracted from tidy tuesday.
+
+<https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-06-20/readme.md>
+
+-   **ufo_sightings.csv**
+
+-   **places.csv**
+
+-   **days_parts_map**
 
 ## Heatmap Distribution of UFO Sightings
 
@@ -210,7 +224,6 @@ ggplot(shape_counts, aes(x = n, y = shape)) +
 ```
 
 ## UFO Sightings By Season For Each Decade
- 
 
 ```{r, dev='ragg_png', fig.width=10,fig.height=6.5,fig.align='center', warning = FALSE, message=FALSE}
 
@@ -329,3 +342,7 @@ ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
 
 
 ```
+
+## Conclusion
+
+## Thank You
