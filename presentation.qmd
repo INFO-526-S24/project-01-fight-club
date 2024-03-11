@@ -346,3 +346,5 @@ ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
 ## Conclusion
 
 ## Thank You
+
+\![Thanks GIF\](images/Thanks.gif)
