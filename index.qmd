@@ -48,8 +48,7 @@ knitr::opts_chunk$set(
 
 ```
 
-```{r}
-{r, echo = FALSE, warning = FALSE, message = FALSE}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 #| label: load-data
 #| include: false
 
