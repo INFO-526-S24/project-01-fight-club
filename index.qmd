@@ -9,7 +9,7 @@ editor: visual
 ```{r}
 #| label: load-packages
 #| include: false
-
+#| code-fold: true
 # Load packages here
 pacman::p_load(tidymodels,
                tidyverse,
@@ -34,7 +34,7 @@ pacman::p_load(tidymodels,
 ```{r}
 #| label: setup
 #| include: false
-
+#| code-fold: true
 # Plot theme
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
 
@@ -51,7 +51,7 @@ knitr::opts_chunk$set(
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 #| label: load-data
 #| include: false
-
+#| code-fold: true
 
 ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
 places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
@@ -104,7 +104,8 @@ Embarking on a quest to uncover the geographic footprint of UFO sightings, we de
 ```{r}
 #| warning: FALSE
 #| echo: FALSE 
-#| output: FALSE   
+#| output: FALSE 
+#| code-fold: true  
   places_location_data <- places |>
   select(state, country, latitude, longitude)
   
@@ -118,7 +119,7 @@ Embarking on a quest to uncover the geographic footprint of UFO sightings, we de
 #| warning: FALSE
 #| echo: FALSE
 #| output: FALSE
-
+#| code-fold: true
 
 world_map <- map_data("world")
 colnames(world_map)[5] <- "country"
@@ -128,7 +129,7 @@ colnames(world_map)[5] <- "country"
 #| warning: FALSE
 #| echo: FALSE
 #| output: FALSE
-
+#| code-fold: true
 
 places_location_data$country <- tolower(places_location_data$country)
 world_map$country <- tolower(world_map$country)
@@ -139,7 +140,7 @@ world_map$country <- tolower(world_map$country)
 #| warning: FALSE
 #| echo: FALSE
 #| output: FALSE
-
+#| code-fold: true
 
 heatmap_data <- left_join(world_map, places_location_data, by = "country")
 
@@ -161,6 +162,7 @@ heatmap_data$sighting_count_range <- factor(heatmap_data$sighting_count_range,
 ```
 
 ```{r, fig.width=10, fig.asp=0.7,fig.align='center'}
+#| code-fold: true
 color_scale_values = c("<1" = "#D8FAFD", 
                        "1-29" = "#8FFAFD", 
                        "30-59" = "#0CFDF3", 
@@ -180,6 +182,7 @@ ggplot() +
 #### UFO Sighting Distribution Around the World
 
 ```{r}
+#| code-fold: true
 us_places_data <- places |>
   select(state, country, country_code, latitude, longitude)
 us_places_data <- us_places_data |>
@@ -189,6 +192,7 @@ us_places_data <- us_places_data |>
 ```
 
 ```{r, fig.align='center'}
+#| code-fold: true
 map_plot <- leaflet(data = us_places_data) |>
   addTiles() |>
   setView(
@@ -207,6 +211,7 @@ map_plot
 #### Variance of Shape Sightings
 
 ```{r}
+#| code-fold: true
 shapes_filtered <- ufo_sightings |>
   select(city, state, country_code, shape) |>
   filter(shape != "other" & shape != "unknown")
@@ -219,11 +224,13 @@ shapes_filtered <- shapes_filtered |>
 ```
 
 ```{r}
+#| code-fold: true
 shape_counts <- shapes_filtered |>
   count(shape)
 ```
 
 ```{r fig.width=13,fig.height=9,fig.align='center', warning=FALSE}
+#| code-fold: true
 ggplot(shape_counts, aes(x = n, y = shape)) +
   geom_bar(stat = "identity", fill=alpha("#0023F5", 0.5)) +
   xlim(-2000, 19000) +
@@ -237,6 +244,7 @@ ggplot(shape_counts, aes(x = n, y = shape)) +
 ```
 
 ```{r, dev='ragg_png', fig.width=10,fig.height=6.5,fig.align='center', warning = FALSE, message=FALSE}
+#| code-fold: true
 
 # Time-series plot by season (Usama)
 
@@ -346,6 +354,7 @@ Let's delve into the mysteries surrounding UFO encounters and their connection t
 #### code
 
 ```{r,  fig.width=10,fig.height=6.5,fig.align='center'}
+#| code-fold: true
 
 # Ufo sightings by part of the day (Naitik)
 
@@ -353,7 +362,7 @@ setDT(ufo_sightings)
 df <- ufo_sightings[, .(sightings = .N), day_part]
 View(df)
 
-df <- na.omit(df)
+df <- na.omit(df) # Omiting the NA values from the df
 
 df$day_part <- gsub("night","Night",df$day_part)
 df$day_part <- gsub("nautical dusk","Nautical Dusk",df$day_part)
@@ -377,7 +386,6 @@ ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
     panel.grid.major = element_blank(), 
     panel.grid.minor = element_blank(),
     )
-
 
 ```
 

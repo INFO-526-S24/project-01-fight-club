@@ -72,11 +72,11 @@ day_parts_map <- readr::read_csv('https://raw.githubusercontent.com/rfordatascie
 
 ## Data Set
 
-The dataset records 80,000 observations and is extracted from Tidy Tuesday.
+The data-set records 80,000 observations and is extracted from Tidy Tuesday.
 
 <https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-06-20/readme.md>
 
-The three datasets are as follows :
+The three data-sets are as follows :
 
 -   **ufo_sightings.csv**
 
@@ -84,7 +84,11 @@ The three datasets are as follows :
 
 -   **days_parts_map**
 
-## Heatmap Distribution of UFO Sightings
+## Question - 1
+
+What is the geographic distribution of UFO sightings? Are there any hotspots where the number of sightings is prevalent? Is there any correlation between the location of the sighting and the shape of the UFO?
+
+## Heat-map Distribution of UFO Sightings
 
 ```{r}
 #| warning: FALSE
@@ -221,6 +225,11 @@ ggplot(shape_counts, aes(x = n, y = shape)) +
 ```
 
 ![](images/shape2.png)
+
+## Question - 2
+
+\
+Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?
 
 ## UFO Sightings By Season For Each Decade
 
