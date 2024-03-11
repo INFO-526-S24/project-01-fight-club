@@ -565,12 +565,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Remove the negative values from elevation column.</li>
 </ul>
-<p><em>Handling the accuracy of the time zones</em></p>
-<ul>
-<li><p>The time zones in the <code>places</code> are first joined onto the <code>states</code> column in the <code>ufo_sightings</code> dataset.</p></li>
-<li><p>From there, we can find the local times for each of the reported sightings.</p></li>
-<li><p>We will also be rounding up or down the dates, depending on the times as this will help us merge the datasets with the <code>day_parts_map</code> dataset as well, using which we will infer if the astrononmical events have an effect on the sightings.</p></li>
-</ul>
 <section id="discuss-potential-biases." class="level4">
 <h4 class="anchored" data-anchor-id="discuss-potential-biases.">Discuss potential biases.</h4>
 <ul>

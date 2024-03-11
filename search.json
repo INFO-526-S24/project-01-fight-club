@@ -53,7 +53,7 @@
     "href": "proposal.html#data-pre-processing",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
     "section": "Data Pre-processing",
-    "text": "Data Pre-processing\nWe would need to do some data cleaning and pre-processing to improve the validity of the visualizations.\nufo_sightings.csv:\n\nUse places where the UFO sightings are more than 200.\nGroup NA, “unknown” and “other” values in the shape column under a single heading.\nInclude only those observations where the duration of UFO sightings are more 5 minutes.\n\nplaces.csv:\n\nRemove the negative values from elevation column.\n\nHandling the accuracy of the time zones\n\nThe time zones in the places are first joined onto the states column in the ufo_sightings dataset.\nFrom there, we can find the local times for each of the reported sightings.\nWe will also be rounding up or down the dates, depending on the times as this will help us merge the datasets with the day_parts_map dataset as well, using which we will infer if the astrononmical events have an effect on the sightings.\n\n\nDiscuss potential biases.\n\nIt is entirely possible that people in smaller cities with lesser knowledge of modern technology may have seen a plane or helicopter in the sky, and mistook it for a UFO. But at the same time, it is possible that they have seen a UFO and didn’t have the proper methods to report such a sighting.\nOn the other hand, people in larger cities may not be able to clearly view these supposed “UFO sightings” due to air pollution and sky-scrapers being more prevalent in these areas. But contrary to people in smaller cities, they may have the means to report the sightings quickly.\nWe believe that although this would introduce bad data in the data-set, there isn’t a suitable solution to address this issue. But the shapes column in the ufo_sightings data-set can be a good way to filter out the data-sets, regardless of the location of the sightings.\nShapes that are more commonly sighted will be more likely to actually be true, versus shapes that have one-off or just a few sightings.\nFor example, the “cube” shape has only been sighted twice, which is improbable that it may be sighted correctly, because otherwise we would have seen more sightings of that shape in our data-set. On the other hand, the circle shape appears to be very likely as it has been sighted over 9000 times.\nFurthermore, in order to establish a correlation between UFO shapes and locations, we plan to run a chi-squared test that can quantify the strength and significance of these relationships."
+    "text": "Data Pre-processing\nWe would need to do some data cleaning and pre-processing to improve the validity of the visualizations.\nufo_sightings.csv:\n\nUse places where the UFO sightings are more than 200.\nGroup NA, “unknown” and “other” values in the shape column under a single heading.\nInclude only those observations where the duration of UFO sightings are more 5 minutes.\n\nplaces.csv:\n\nRemove the negative values from elevation column.\n\n\nDiscuss potential biases.\n\nIt is entirely possible that people in smaller cities with lesser knowledge of modern technology may have seen a plane or helicopter in the sky, and mistook it for a UFO. But at the same time, it is possible that they have seen a UFO and didn’t have the proper methods to report such a sighting.\nOn the other hand, people in larger cities may not be able to clearly view these supposed “UFO sightings” due to air pollution and sky-scrapers being more prevalent in these areas. But contrary to people in smaller cities, they may have the means to report the sightings quickly.\nWe believe that although this would introduce bad data in the data-set, there isn’t a suitable solution to address this issue. But the shapes column in the ufo_sightings data-set can be a good way to filter out the data-sets, regardless of the location of the sightings.\nShapes that are more commonly sighted will be more likely to actually be true, versus shapes that have one-off or just a few sightings.\nFor example, the “cube” shape has only been sighted twice, which is improbable that it may be sighted correctly, because otherwise we would have seen more sightings of that shape in our data-set. On the other hand, the circle shape appears to be very likely as it has been sighted over 9000 times.\nFurthermore, in order to establish a correlation between UFO shapes and locations, we plan to run a chi-squared test that can quantify the strength and significance of these relationships."
   },
   {
     "objectID": "proposal.html#questions-and-analysis-plan",
@@ -74,14 +74,49 @@
     "href": "index.html",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
     "section": "",
-    "text": "The proposal of the project is in the Proposal tab."
+    "text": "Our project embarks on a quest to analyze and visualize that might reveal the secrets hidden.\nArmed with the powerful ggplot2 library, we embarked on a visual odyssey, crafting intricate visualizations that brought the geographic distribution of UFO sightings to life.\nWe explored the intriguing correlations between sightings location and the shapes of the reported UFO’s, fueling our imaginations with visions of otherwordly visitors.\nBut our quest did not end there. We delved deeper into the temporal realm, analyzing seasonal patterns in sightings, seeking to unravel the mysteries that might lie hidden within the cycle of season."
   },
   {
     "objectID": "index.html#abstract",
     "href": "index.html#abstract",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
     "section": "",
-    "text": "The proposal of the project is in the Proposal tab."
+    "text": "Our project embarks on a quest to analyze and visualize that might reveal the secrets hidden.\nArmed with the powerful ggplot2 library, we embarked on a visual odyssey, crafting intricate visualizations that brought the geographic distribution of UFO sightings to life.\nWe explored the intriguing correlations between sightings location and the shapes of the reported UFO’s, fueling our imaginations with visions of otherwordly visitors.\nBut our quest did not end there. We delved deeper into the temporal realm, analyzing seasonal patterns in sightings, seeking to unravel the mysteries that might lie hidden within the cycle of season."
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Introduction",
+    "text": "Introduction\nUFO sightings dataset - https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20. It provides a comprehensive compilation of UFO sightings worldwide."
+  },
+  {
+    "objectID": "index.html#datasets-and-key-variables",
+    "href": "index.html#datasets-and-key-variables",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Datasets and Key Variables",
+    "text": "Datasets and Key Variables\nThe dataset records 80,000 observations.\nThere are three datasets.\n\nufo_sightings.csv\nreported_date_time_utc, shape, city, state and country_code.\nplaces.csv\nlatitude, longitude, elevation and population.\n\nday_parts_map.csv\nHas all column other than rounded_lat and rounded_log."
+  },
+  {
+    "objectID": "index.html#question-1",
+    "href": "index.html#question-1",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Question-1",
+    "text": "Question-1\ncode\nus_map\nheatmap\nhistogram\nAnalysis:"
+  },
+  {
+    "objectID": "index.html#question-2",
+    "href": "index.html#question-2",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Question-2",
+    "text": "Question-2\nLine chart\nsun burst\n–\nAnalysis:"
+  },
+  {
+    "objectID": "index.html#conclusion",
+    "href": "index.html#conclusion",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nThe geographic distribution analysis reveals hotspots of UFO sightings, particularly in certain areas of the United States, suggesting a correlation between location and UFO activity.\nSeasonal Analysis reveals potential patterns in UFO sightings, with variations across different times of the year, while examination of Astronomical events suggest a potential influence on reported sightings."
   },
   {
     "objectID": "about.html",
@@ -112,66 +147,24 @@
     "text": "Data Types:\n\nColumn: data type"
   },
   {
-    "objectID": "presentation.html#quarto",
-    "href": "presentation.html#quarto",
+    "objectID": "presentation.html#heatmap-distribution-of-ufo-sightings",
+    "href": "presentation.html#heatmap-distribution-of-ufo-sightings",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Quarto",
-    "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
+    "section": "Heatmap Distribution of UFO Sightings",
+    "text": "Heatmap Distribution of UFO Sightings"
   },
   {
-    "objectID": "presentation.html#layouts",
-    "href": "presentation.html#layouts",
+    "objectID": "presentation.html#ufo-sighting-distribution-around-the-world",
+    "href": "presentation.html#ufo-sighting-distribution-around-the-world",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Layouts",
-    "text": "Layouts\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\nAnd add footnotes"
+    "section": "UFO Sighting Distribution Around the World",
+    "text": "UFO Sighting Distribution Around the World"
   },
   {
-    "objectID": "presentation.html#code",
-    "href": "presentation.html#code",
+    "objectID": "presentation.html#variance-of-shape-sightings",
+    "href": "presentation.html#variance-of-shape-sightings",
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Code",
-    "text": "Code\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
-  },
-  {
-    "objectID": "presentation.html#plots",
-    "href": "presentation.html#plots",
-    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Plots",
-    "text": "Plots\n\n\nWarning: Removed 2 rows containing missing values (`geom_point()`)."
-  },
-  {
-    "objectID": "presentation.html#plot-and-text",
-    "href": "presentation.html#plot-and-text",
-    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Plot and text",
-    "text": "Plot and text\n\n\n\nSome text\ngoes here"
-  },
-  {
-    "objectID": "presentation.html#tables",
-    "href": "presentation.html#tables",
-    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Tables",
-    "text": "Tables\nIf you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n\n\nAdelie\nTorgersen\nNA\nNA\nNA\nNA\nNA\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale"
-  },
-  {
-    "objectID": "presentation.html#images",
-    "href": "presentation.html#images",
-    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Images",
-    "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
-  },
-  {
-    "objectID": "presentation.html#math-expressions",
-    "href": "presentation.html#math-expressions",
-    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Math Expressions",
-    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
-  },
-  {
-    "objectID": "presentation.html#feeling-adventurous",
-    "href": "presentation.html#feeling-adventurous",
-    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
-    "section": "Feeling adventurous?",
-    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+    "section": "Variance of Shape Sightings",
+    "text": "Variance of Shape Sightings"
   }
 ]
