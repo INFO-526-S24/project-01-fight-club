@@ -1,5 +1,6 @@
 ---
 title: "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data"
+
 subtitle: "INFO 526 - Spring 2024 - Project 1"
 author: "Fight Club"
 title-slide-attributes:
@@ -193,11 +194,8 @@ map_plot
 
 ## Variance of Shape Sightings
 
-```         
-```
+<div class="scrollable-content">
 
-::: columns
-::: {.column width="50%"}
 ```{r,echo=FALSE , fig.width=13,fig.height=9,fig.align='center', warning=FALSE}
 shapes_filtered <- ufo_sightings |>
   select(city, state, country_code, shape) |>
@@ -223,12 +221,9 @@ ggplot(shape_counts, aes(x = n, y = shape)) +
     axis.title.x = element_blank(),
     axis.text.x = element_text(size = 15))
 ```
-:::
 
-::: {.column width="50%"}
-![Image](images/shapes.png){width="20" height="3"}\![Your Image\](images/shapes2.png)
-:::
-:::
+![](images/shape2.png)
+</div>
 
 ## UFO Sightings By Season For Each Decade
 
@@ -356,6 +351,6 @@ To conclude,
 
 While we can’t definitively say whether UFO sightings are real or not, there are more than enough claims to argue that there is a possibility extraterrestrial life exists and that we may have encountered them in the past.
 
-## Thank You
+## Questions Are Welcomed 🛸
 
-\![Thanks GIF\] (images/Thanks.gif)
+![](images/Thanks.gif)

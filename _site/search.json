@@ -229,5 +229,54 @@
     "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
     "section": "Variance of Shape Sightings",
     "text": "Variance of Shape Sightings"
+  },
+  {
+    "objectID": "presentation.html#data-set",
+    "href": "presentation.html#data-set",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Data Set",
+    "text": "Data Set\nThe dataset records 80,000 observations and is extracted from tidy tuesday.\nhttps://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-06-20/readme.md\nThe three datasets are as follows :\n\nufo_sightings.csv\nplaces.csv\ndays_parts_map"
+  },
+  {
+    "objectID": "presentation.html#ufo-sightings-by-season-for-each-decade",
+    "href": "presentation.html#ufo-sightings-by-season-for-each-decade",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "UFO Sightings By Season For Each Decade",
+    "text": "UFO Sightings By Season For Each Decade"
+  },
+  {
+    "objectID": "presentation.html#ufo-sightings-by-part-of-day",
+    "href": "presentation.html#ufo-sightings-by-part-of-day",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "UFO Sightings by Part of Day",
+    "text": "UFO Sightings by Part of Day"
+  },
+  {
+    "objectID": "presentation.html#conclusion",
+    "href": "presentation.html#conclusion",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Conclusion",
+    "text": "Conclusion"
+  },
+  {
+    "objectID": "presentation.html#thank-you",
+    "href": "presentation.html#thank-you",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Thank You",
+    "text": "Thank You\n![Thanks GIF] (images/Thanks.gif)"
+  },
+  {
+    "objectID": "presentation.html#wrap-up",
+    "href": "presentation.html#wrap-up",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Wrap Up",
+    "text": "Wrap Up\nTo conclude,\nWhile we can’t definitively say whether UFO sightings are real or not, there are more than enough claims to argue that there is a possibility extraterrestrial life exists and that we may have encountered them in the past."
+  },
+  {
+    "objectID": "presentation.html#questions-are-welcomed",
+    "href": "presentation.html#questions-are-welcomed",
+    "title": "Unveiling the Mystery: Exploring Patterns and Associations in UFO Sightings Data",
+    "section": "Questions Are Welcomed 🛸",
+    "text": "Questions Are Welcomed 🛸"
   }
 ]
