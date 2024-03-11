@@ -193,7 +193,7 @@ map_plot
 
 ## Variance of Shape Sightings
 
-```{}
+```         
 ```
 
 ::: columns
@@ -226,7 +226,7 @@ ggplot(shape_counts, aes(x = n, y = shape)) +
 :::
 
 ::: {.column width="50%"}
-\![Your Image\](images/shapes2.png)
+![Image](images/shapes.png){width="20" height="3"}\![Your Image\](images/shapes2.png)
 :::
 :::
 
@@ -350,7 +350,11 @@ ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
 
 ```
 
-## Conclusion
+## Wrap Up
+
+To conclude,
+
+While we can’t definitively say whether UFO sightings are real or not, there are more than enough claims to argue that there is a possibility extraterrestrial life exists and that we may have encountered them in the past.
 
 ## Thank You
 
