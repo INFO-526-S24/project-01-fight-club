@@ -203,7 +203,6 @@ In the second plot, we zoned in on the US. We plotted all the individual sightin
 
 For the third plot, we can clearly see that people have reported a "light" as the shape of their sighting the most. After that, triangle, circle and fireball take preference. With so many people reporting similar shapes, we need to take into consideration that there is a reasoning behind this. We don't usually see triangular or circular objects floating in the sky and the fact that there were multiple people reporting them indicates that there might have been some proof behind it.
 
-
 ```{r, dev='ragg_png', fig.width=10,fig.height=6.5,fig.align='center', warning = FALSE, message=FALSE}
 #| code-fold: true
 
@@ -282,35 +281,17 @@ ggplot(grouped_data, aes(x=decade, y=sightings, color=season)) +
         panel.ontop = TRUE) 
 ```
 
-#### Analysis:
-
-1.  **Heatmap Distribution of UFO Sightings**: As we gaze upon the heatmap, we see patches of vibrant colors, indicating regions teeming with UFO reports. From bustling urban centers to remote corners of the globe, each hue tells a tale of mysterious sightings, inviting us to delve deeper into the unknown.
-
-2.  **UFO Sighting Distribution Around the World**: Zooming in on the United States, we embark on a virtual journey across states, uncovering clusters of UFO activity like hidden gems waiting to be discovered. With each click, we traverse landscapes rich with stories of strange lights and unidentified objects, igniting our sense of wonder.
-
-3.  **Variance of Shape Sightings**: As we stroll through the gallery of UFO shapes, we marvel at the diversity on display. Some shapes captivate our attention with their frequency, while others intrigue us with their rarity. Each shape adds a layer of complexity to the UFO narrative, leaving us pondering the mysteries of the cosmos.
-
-4.  **Time-series Plot by Season**: Flipping through the pages of time, we observe the ebb and flow of UFO sightings with each passing season. Like characters in a story, seasons come alive with their own quirks and patterns, shaping the narrative of UFO encounters over decades. As we journey through time, we are reminded of the cyclical nature of curiosity and exploration.
-
-## Question-2
-
-Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?
+## Question-2: Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?
 
 #### Introduction
 
-On a Journey Through the Seasons of UFO Sightings:
-
-Let's delve into the mysteries surrounding UFO encounters and their connection to the ever-changing seasons. Imagine walking through a visual landscape that captures the essence of each season, from the warmth of summer to the chill of winter, all while uncovering patterns in reported sightings. As we navigate through the data, we'll explore whether astronomical events play a role in shaping these enigmatic encounters, inviting you to ponder the cosmic dance between the unknown and the familiar.
+For the second question, we aimed to analyze any prevalent historical trends in the UFO sightings and justify the occurrence of those trends, if any. We divided this question into two segments. For the first segment, we wanted to visualize any historical trends in the number of UFO sightings and for the second segment, we adopted a more granular approach and visualized the number of sightings by different parts of the day i.e. dusk, dawn etc. Finally, we correlated our visualizations with any other historical trends that occurred during the same time-frame.
 
 #### Approach
 
-1 Preparing the Data: Just like setting up our gear before an expedition, we'll clean and organize our data to ensure it's in top shape for analysis.
+**i. Time-series Visualization of UFO Sightings**
 
-2 Seasonal Explorations: Imagine we're stargazers, observing the night sky throughout the year. We'll group sightings by season to see if there are any patterns or trends in when UFOs appear.
-
-3 Astronomical Insights: Like astronomers tracking the movements of celestial bodies, we'll investigate if events like dusk, dawn, or twilight coincide with reported UFO sightings.
-
-4 Visualizing the Journey: Using our artistic flair, we'll craft captivating visualizations that paint a vivid picture of UFO encounters across seasons and celestial events.
+To adopt a more generalized approach, we wanted to convert the data into decades from years. To this end, we joined the UFO sightings data with places by `city`, `state`, and `country_code`. We then filtered the sightings by shape, removing any NULL or undefined values. Afterwards, we mutated the seasons column and then summarized the sightings count by decade and season. Finally, we plotted the data using geom_line and added a few aesthetics to make the plot look more pleasing.
 
 #### Code
 
@@ -350,28 +331,24 @@ ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
 
 ```
 
-#### Analysis:
+**ii. UFO Sightings by part of the day:**
 
-1.  **Initiating Data Preparation:**
+Using the joined dataset from last part, we calculated the number of sightings by astronomical events by `day_part` column. By this point, most of the data was already pre-processed therefore we only removed any missing or NA values from the day_part column. Afterwards, we standardized the naming convention and used `geom_bar` to make a histogram of count against astronomical events.
 
-    -   To ensure our expedition yielded meaningful insights, we commenced by meticulously preparing the data, laying a solid foundation for our analysis.
+### Analysis
 
-    -   Through careful cleaning and organization, we readied the dataset for the adventure ahead, ensuring accuracy and reliability in our findings.
+For the first plot, we saw some intriguing trends. The sighting up until 1980 remained less than 1000. Post 1990, the number of sightings started to increase and reached its peak in 2010. At this moment, we cannot draw any conclusions for the most recent decade (2020) because we do not have 7 years worth of data (2024 till 2030) and the data has not matured yet. By seasons, we saw that most number of sightings took place during summers.
 
-2.  **Unveiling Seasonal Insights:**
+There can be several reasons for this trend like improved technology for sightings, a population boost hence increasing the number of sightings per capita etc but we shortlisted the inclusion of internet into the picture as the most important one. With internet, UFOs and alien life has become one of the most debated topics across the world and people are more likely to share their experiences and sightings online, leading to a heightened awareness and reporting of UFO sightings. Additionally, the internet also provides a platform for the dissemination of information and the formation of online communities like Reddit groups dedicated to discussing UFO phenomena, further amplifying interest and contributing to the observed increase in reported sightings.
 
-    -   Like seasoned investigators, we delved into the data to unravel the mysteries of seasonal patterns in UFO sightings.
+For maximum sightings during summer, the season's extended daylight, clearer skies, and heightened outdoor activity contribute to its status as a prime season for UFO sightings, forecasting increased attention and reporting of aerial phenomenon during this time.
 
-    -   Our exploration led us to uncover fascinating correlations between the changing seasons and the frequency of reported encounters, shedding light on nature's influence on these phenomena.
+For the second plot, we saw that most number of UFO sightings (\> 80%) took place during night time, while the least number of UFO sightings took place during civil dawn.
 
-3.  **Exploring Astronomical Associations:**
+Several reasons can be attributed to this phenomenon. Nighttime offers ideal conditions for observing celestial phenomenon, with reduced ambient light and and decreased human activity allowing for clearer visibility of the sky. Moreover, the darkness of night often evokes a sense mystery and intrigue, prompting individuals to be more vigilant.
 
-    -   With a keen eye on the celestial realm, we ventured into the realm of astronomical events to understand their potential impact on reported UFO sightings.
+## Final Thoughts
 
-    -   Through rigorous analysis, we sought to discern whether phenomena such as dusk, dawn, or twilight played a role in shaping the occurrence of these mysterious encounters.
+Karl Sagan once tried to address the question of whether aliens exist in terms of probability. He explained that given the infinitely many exoplanets in our universe, the mathematical probability of alien life existing on at least one of those planets is not 0. However,despite this mathematical possibility, the question of whether aliens exist remains unanswered due to the lack of conclusive evidence in our analysis. For every observed trend, there exists a possible explanation.
 
-## Conclusion
-
--   The geographic distribution analysis reveals hotspots of UFO sightings, particularly in certain areas of the United States, suggesting a correlation between location and UFO activity.
-
--   Seasonal Analysis reveals potential patterns in UFO sightings, with variations across different times of the year, while examination of Astronomical events suggest a potential influence on reported sightings.
+Ongoing scientific research and exploration, including the search for microbial life on other planets, continues to fuel speculation and curiosity surrounding the existence of aliens. Ultimately, the question remains one of the most intriguing and unresolved mysteries in science.
