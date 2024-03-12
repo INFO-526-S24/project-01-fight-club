@@ -19,7 +19,10 @@ website:
 
 format:
   html:
-    theme: [simple,data/customtheming.scss]
+    theme:
+      light: flatly
+      dark: darkly
+      
     toc: true
 
 execute:
