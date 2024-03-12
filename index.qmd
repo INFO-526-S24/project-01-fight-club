@@ -203,6 +203,21 @@ In the second plot, we zoned in on the US. We plotted all the individual sightin
 
 For the third plot, we can clearly see that people have reported a "light" as the shape of their sighting the most. After that, triangle, circle and fireball take preference. With so many people reporting similar shapes, we need to take into consideration that there is a reasoning behind this. We don't usually see triangular or circular objects floating in the sky and the fact that there were multiple people reporting them indicates that there might have been some proof behind it.
 
+
+
+## Question-2: Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?
+
+#### Introduction
+
+For the second question, we aimed to analyze any prevalent historical trends in the UFO sightings and justify the occurrence of those trends, if any. We divided this question into two segments. For the first segment, we wanted to visualize any historical trends in the number of UFO sightings and for the second segment, we adopted a more granular approach and visualized the number of sightings by different parts of the day i.e. dusk, dawn etc. Finally, we correlated our visualizations with any other historical trends that occurred during the same time-frame.
+
+#### Approach
+
+**i. Time-series Visualization of UFO Sightings**
+
+To adopt a more generalized approach, we wanted to convert the data into decades from years. To this end, we joined the UFO sightings data with places by `city`, `state`, and `country_code`. We then filtered the sightings by shape, removing any NULL or undefined values. Afterwards, we mutated the seasons column and then summarized the sightings count by decade and season. Finally, we plotted the data using geom_line and added a few aesthetics to make the plot look more pleasing.
+
+### Code
 ```{r, dev='ragg_png', fig.width=10,fig.height=6.5,fig.align='center', warning = FALSE, message=FALSE}
 #| code-fold: true
 
@@ -281,17 +296,10 @@ ggplot(grouped_data, aes(x=decade, y=sightings, color=season)) +
         panel.ontop = TRUE) 
 ```
 
-## Question-2: Are there any patterns to the sightings concerning seasons? Do astronomical events affect the reported sightings?
 
-#### Introduction
+**ii. UFO Sightings by part of the day:**
 
-For the second question, we aimed to analyze any prevalent historical trends in the UFO sightings and justify the occurrence of those trends, if any. We divided this question into two segments. For the first segment, we wanted to visualize any historical trends in the number of UFO sightings and for the second segment, we adopted a more granular approach and visualized the number of sightings by different parts of the day i.e. dusk, dawn etc. Finally, we correlated our visualizations with any other historical trends that occurred during the same time-frame.
-
-#### Approach
-
-**i. Time-series Visualization of UFO Sightings**
-
-To adopt a more generalized approach, we wanted to convert the data into decades from years. To this end, we joined the UFO sightings data with places by `city`, `state`, and `country_code`. We then filtered the sightings by shape, removing any NULL or undefined values. Afterwards, we mutated the seasons column and then summarized the sightings count by decade and season. Finally, we plotted the data using geom_line and added a few aesthetics to make the plot look more pleasing.
+Using the joined dataset from last part, we calculated the number of sightings by astronomical events by `day_part` column. By this point, most of the data was already pre-processed therefore we only removed any missing or NA values from the day_part column. Afterwards, we standardized the naming convention and used `geom_bar` to make a histogram of count against astronomical events.
 
 #### Code
 
@@ -330,10 +338,6 @@ ggplot(df, aes(x=reorder(day_part, sightings), y=sightings, fill=day_part)) +
     )
 
 ```
-
-**ii. UFO Sightings by part of the day:**
-
-Using the joined dataset from last part, we calculated the number of sightings by astronomical events by `day_part` column. By this point, most of the data was already pre-processed therefore we only removed any missing or NA values from the day_part column. Afterwards, we standardized the naming convention and used `geom_bar` to make a histogram of count against astronomical events.
 
 ### Analysis
 
